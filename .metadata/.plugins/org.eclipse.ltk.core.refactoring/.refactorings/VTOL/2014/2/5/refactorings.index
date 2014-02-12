@@ -1,0 +1,4 @@
+1391278623518	Extract method 'ShowMessage'
+1391280013771	Encapsulate field 'instance'
+1391285401419	Convert local variable 'fireworksCount' to field
+1391299014852	Delete element

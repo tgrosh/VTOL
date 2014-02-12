@@ -1,0 +1,20 @@
+package com.singletongames.vtol;
+
+public class LaunchPadObjective extends Objective {
+	LaunchPad pad;
+	
+	public LaunchPadObjective(LanderScene scene, int objectiveID, String description, LaunchPad pad, IObjectiveListener listener) {
+		super(scene, objectiveID, description, listener);
+		this.pad = pad;
+
+		Load();
+	}
+
+	public LaunchPadObjective(LanderScene scene, int objectiveID, String description, LaunchPad pad, int prerequisiteID, IObjectiveListener listener) {
+		super(scene, objectiveID, description, prerequisiteID, listener);
+		this.pad = pad;
+
+		Load();
+	}
+
+}

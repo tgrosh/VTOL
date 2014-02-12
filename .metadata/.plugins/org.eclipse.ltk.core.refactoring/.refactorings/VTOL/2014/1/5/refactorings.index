@@ -1,0 +1,53 @@
+1390705144285	Rename method 'createPhyiscs'
+1390746250554	Extract method 'createPolygonFixture'
+1390746538029	Rename local variable 'sBody'
+1390746544037	Rename local variable 'sBody'
+1390746584237	Move member 'createPolygonFixtureDef'
+1390753264287	Copy compilation unit
+1390753320591	Rename field 'tLevels'
+1390754730057	Rename field 'fLevelID'
+1390754742360	Rename field 'fLevelLocked'
+1390754773987	Rename field 'fLevelFinished'
+1390755203377	Encapsulate field 'Name'
+1390755207628	Encapsulate field 'Id'
+1390755259204	Encapsulate field 'Locked'
+1390755262212	Encapsulate field 'Finished'
+1390755972289	Encapsulate field 'mChapterID'
+1390756214341	Encapsulate field 'levels'
+1390756454769	Copy file
+1390756467004	Copy files
+1390756503740	Copy files
+1390756508175	Delete element
+1390756576341	Copy compilation unit
+1390757031659	Rename resource 'Polentical Neon Bold.ttf'
+1390761559024	Encapsulate field 'name'
+1390772189008	Convert local variable 'modifiers' to field
+1390790579948	Convert local variable 'pauseButton' to field
+1390790586964	Convert local variable 'FuelGaugeBackground' to field
+1390790592257	Convert local variable 'FuelGaugeOverlay' to field
+1390790997750	Convert local variable 'skipText' to field
+1390914348361	Copy compilation unit
+1390922002632	Delete element
+1390924142582	Copy compilation unit
+1390924159781	Rename type 'ShipDB'
+1390927247578	Rename field 'mAllChapters'
+1390930773259	Encapsulate field 'instance'
+1390930824505	Encapsulate field 'instance'
+1390930871154	Encapsulate field 'instance'
+1390932838695	Encapsulate field 'instance'
+1390932882997	Rename type 'ContactListener'
+1390934433497	Delete element
+1390953258646	Extract method 'getRating'
+1390965688899	Convert local variable 'sInfoProgress1' to field
+1390965693786	Convert local variable 'sInfoProgress2' to field
+1390965698580	Convert local variable 'sInfoProgress3' to field
+1390965703373	Convert local variable 'sInfoProgress4' to field
+1390965710086	Convert local variable 'tName' to field
+1390965716023	Convert local variable 'landerSprites' to field
+1390965723431	Convert local variable 'tDescription' to field
+1390966366355	Convert local variable 'sFrame' to field
+1390966737413	Convert local variable 'rectTop' to field
+1390966742355	Convert local variable 'rectBottom' to field
+1391048151736	Convert local variable 'tLocked' to field
+1391048156770	Convert local variable 'tTapToSelect' to field
+1391096105786	Copy compilation unit

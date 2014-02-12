@@ -1,0 +1,45 @@
+package com.singletongames.vtol;
+
+import java.util.List;
+
+import org.andengine.opengl.texture.region.ITextureRegion;
+
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.singletongames.vtol.Util.BodyShape;
+
+public class WoodenBox extends PhysicsSprite {
+
+	public WoodenBox(float pX, float pY, ITextureRegion pTextureRegion,
+			FixtureDef pFixtureDef, IPhysicsSpriteListener listener) {
+		super(pX, pY, pTextureRegion, pFixtureDef, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+	public WoodenBox(float pX, float pY, ITextureRegion pTextureRegion,
+			FixtureDef pFixtureDef, BodyType pBodyType, BodyShape pBodyShape,
+			IPhysicsSpriteListener listener) {
+		super(pX, pY, pTextureRegion, pFixtureDef, pBodyType, pBodyShape,
+				listener);
+		// TODO Auto-generated constructor stub
+	}
+
+	public WoodenBox(float pX, float pY, ITextureRegion pTextureRegion,
+			FixtureDef pFixtureDef, Object fixtureUserData, BodyType pBodyType,
+			Vector2[] vertices, IPhysicsSpriteListener listener) {
+		super(pX, pY, pTextureRegion, pFixtureDef, fixtureUserData, pBodyType,
+				vertices, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+	public WoodenBox(float pX, float pY, ITextureRegion pTextureRegion,
+			List<FixtureDef> defs, BodyType pBodyType,
+			List<Object> fixtureUserData, Object bodyUserData,
+			IPhysicsSpriteListener listener) {
+		super(pX, pY, pTextureRegion, defs, pBodyType, fixtureUserData,
+				bodyUserData, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+}

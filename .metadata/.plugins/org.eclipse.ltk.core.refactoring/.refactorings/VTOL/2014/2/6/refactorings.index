@@ -1,0 +1,31 @@
+1391307513541	Rename field 'sBubble'
+1391358882846	Delete element
+1391361798861	Convert local variable 'trainingListener' to field
+1391518217099	Encapsulate field 'complete'
+1391518450127	Encapsulate field 'listeners'
+1391519445343	Encapsulate field 'listeners'
+1391521781130	Extract method 'loadObjectives'
+1391523713044	Encapsulate field 'description'
+1391528302518	Encapsulate field 'objectiveZones'
+1391529120391	Copy compilation unit
+1391529162471	Copy compilation unit
+1391530688437	Copy compilation unit
+1391538233229	Copy file
+1391538241427	Rename resource 'Level0-0.tmx'
+1391540019072	Delete element
+1391541516340	Rename type 'XMLParser'
+1391557596078	Delete element
+1391557604539	Copy file
+1391557608648	Delete element
+1391558136401	Rename field 'mID'
+1391612238622	Rename type 'LaunchPadObjective'
+1391615108673	Convert local variable 'area' to field
+1391616916611	Delete element
+1391622848159	Extract method 'Restart'
+1391622879153	Extract method 'MainMenu'
+1391699576213	Convert local variable 'ropeLine' to field
+1391700107583	Rename method 'attachCargoBody'
+1391700115049	Rename local variable 'body'
+1391712631651	Convert local variable 'ropeLine' to field
+1391714792292	Extract method 'createRope'
+1391742142790	Convert local variable 'ropeJoint' to field

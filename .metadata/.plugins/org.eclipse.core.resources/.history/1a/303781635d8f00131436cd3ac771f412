@@ -1,0 +1,54 @@
+package com.singletongames.vtol;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.andengine.extension.physics.box2d.PhysicsFactory;
+import org.andengine.opengl.texture.region.TiledTextureRegion;
+
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.singletongames.vtol.Util.BodyShape;
+
+public class WoodenBox extends PhysicsSprite {
+
+	public WoodenBox(float pX, float pY) {		
+		super(pX, pY, Resources.WoodenBox, getFixtureDefs(Resources.WoodenBox), BodyType.DynamicBody, getFixtureUserData());
+	}
+
+	private static List<Object> getFixtureUserData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static List<FixtureDef> getFixtureDefs(TiledTextureRegion tex) {		
+		List<FixtureDef> defs = new ArrayList<FixtureDef>();
+		
+		defs.add(Util.createPolygonFixtureDef(getBodyVertices(tex), PhysicsFactory.createFixtureDef(.05f, 0, .2f)));
+		defs.add(Util.createPolygonFixtureDef(getCargoAttachmentVertices(tex), PhysicsFactory.createFixtureDef(0f, 0f, 0f, true)));
+				
+		return defs;
+	}
+	
+	protected static Vector2[] getBodyVertices(TiledTextureRegion tex) {
+		Vector2[] vertices = new Vector2[4];
+		vertices[0] = Util.getBodyPoint(tex.getTextureRegion(0), new Vector2(0, 0));
+		vertices[1] = Util.getBodyPoint(tex.getTextureRegion(0), new Vector2(60, 0));		
+		vertices[2] = Util.getBodyPoint(tex.getTextureRegion(0), new Vector2(60, 60));
+		vertices[3] = Util.getBodyPoint(tex.getTextureRegion(0), new Vector2(0, 60f));
+		
+		return vertices;
+	}
+
+	
+	protected static Vector2[] getCargoAttachmentVertices(TiledTextureRegion tex) {
+		Vector2[] vertices = new Vector2[4];
+		vertices[0] = Util.getBodyPoint(tex.getTextureRegion(0), new Vector2(0f, 0f));
+		vertices[1] = Util.getBodyPoint(tex.getTextureRegion(0), new Vector2(0, -60f));		
+		vertices[2] = Util.getBodyPoint(tex.getTextureRegion(0), new Vector2(60, -60f));
+		vertices[3] = Util.getBodyPoint(tex.getTextureRegion(0), new Vector2(60, 0));
+		
+		return vertices;
+	}
+}

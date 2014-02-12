@@ -1,0 +1,15 @@
+package com.singletongames.vtol;
+
+public class LaunchPadObjective extends Objective {
+
+	public LaunchPadObjective(LanderScene scene, int objectiveID, String description, LaunchPad pad, IObjectiveListener listener) {
+		super(scene, objectiveID, description, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+	public LaunchPadObjective(LanderScene scene, int objectiveID, String description, LaunchPad pad, int prerequisiteID, IObjectiveListener listener) {
+		super(scene, objectiveID, description, prerequisiteID, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+}
