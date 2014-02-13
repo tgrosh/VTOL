@@ -1,0 +1,17 @@
+package com.singletongames.vtol;
+
+public class TakeoffObjective extends Objective {
+
+	public TakeoffObjective(LanderScene scene, int objectiveID,
+			String description, IObjectiveListener listener) {
+		super(scene, objectiveID, description, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+	public TakeoffObjective(LanderScene scene, int objectiveID,
+			String description, int prerequisiteID, IObjectiveListener listener) {
+		super(scene, objectiveID, description, prerequisiteID, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+}

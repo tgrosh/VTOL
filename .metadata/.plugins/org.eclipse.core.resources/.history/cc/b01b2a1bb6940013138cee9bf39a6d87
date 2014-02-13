@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+	<chapter id="0">
+		<level id="1">
+			<objectives>
+ 				<objective id="0" type="ZoneObjective" description="Climb to High Altitude" objectiveZoneID="0" />
+  				<objective id="1" type="SafeReturnObjective" description="Safely Return to Launch Pad" prerequisiteId="0" />
+			</objectives>
+		</level>
+		<level id="2">
+			<objectives>
+				<objective id="0" type="TakeoffObjective" description="Take Off" />
+ 				<objective id="1" type="LandingPadObjective" description="Land Safely on the Landing Pad" prerequisiteId="0" landingPadId="0" />  				
+			</objectives>
+		</level>
+		<level id="3">
+			<objectives>
+				<objective id="0" type="TakeoffObjective" description="Take Off" />
+				<objective id="1" type="ZoneObjective" description="wp1" objectiveZoneID="0" hidden="true" />
+ 				<objective id="1" type="LandingPadObjective" description="Land Safely on the Landing Pad" prerequisiteId="0" landingPadId="0" />  				
+			</objectives>
+		</level>
+	</chapter>
+</game>
+

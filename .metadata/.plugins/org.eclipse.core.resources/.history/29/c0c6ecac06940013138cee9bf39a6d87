@@ -1,0 +1,111 @@
+package com.singletongames.vtol;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Objective implements IObjectiveManagerListener {
+	public enum ObjectiveStatus{
+		INPROGRESS,
+		COMPLETE,
+		FAILED
+	}
+	protected ObjectiveStatus status = ObjectiveStatus.INPROGRESS;
+	protected List<IObjectiveListener> listeners = new ArrayList<IObjectiveListener>();
+	private boolean notified = false;
+	LanderScene scene;
+	private String description; 
+	int prerequisiteID = -1;
+	boolean prerequisiteComplete = false;
+	int objectiveID;
+	
+	public Objective(LanderScene scene, int objectiveID, String description, IObjectiveListener listener){
+		this.objectiveID = objectiveID;
+		this.scene = scene;
+		this.description = description;		
+		this.listeners.add(listener);
+	}
+	
+	public Objective(LanderScene scene, int objectiveID, String description, int prerequisiteID, IObjectiveListener listener){
+		this.objectiveID = objectiveID;
+		this.scene = scene;
+		this.description = description;
+		this.prerequisiteID = prerequisiteID;
+		this.listeners.add(listener);
+	}
+		
+	public List<IObjectiveListener> getListeners() {
+		return listeners;
+	}
+	
+	public void addListener(IObjectiveListener listener) {
+		listeners.add(listener);
+	}
+	
+	protected void setComplete(){
+		if (this.status != ObjectiveStatus.COMPLETE) notified = false;
+		this.status = ObjectiveStatus.COMPLETE;
+		if (!notified){
+			for (IObjectiveListener listener: listeners){
+				listener.onComplete(this);
+			}
+		}
+		notified = true;
+	}
+	
+	protected void setFailed(){
+		if (this.status != ObjectiveStatus.FAILED) notified = false;
+		this.status = ObjectiveStatus.FAILED;
+		if (!notified){
+			for (IObjectiveListener listener: listeners){
+				listener.onFail(this);
+			}
+		}
+		notified = true;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getObjectiveID() {
+		return objectiveID;
+	}
+
+	
+	public ObjectiveStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ObjectiveStatus status) {
+		this.status = status;
+		notified = false;
+	}
+
+	public int getPrerequisiteID() {
+		return prerequisiteID;
+	}
+
+	@Override
+	public void onAllObjectivesComplete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onObjectiveComplete(Objective objective) {
+		if (objective.getObjectiveID() == this.prerequisiteID){
+			
+		}
+	}
+
+	@Override
+	public void onObjectiveFail(Objective objective) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

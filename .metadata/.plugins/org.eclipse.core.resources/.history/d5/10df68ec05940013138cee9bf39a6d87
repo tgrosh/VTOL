@@ -1,0 +1,22 @@
+package com.singletongames.vtol;
+
+public class TakeoffObjective extends Objective  {
+
+	public TakeoffObjective(LanderScene scene, int objectiveID,	String description, IObjectiveListener listener) {
+		super(scene, objectiveID, description, listener);
+
+		Load();
+	}
+
+	public TakeoffObjective(LanderScene scene, int objectiveID,	String description, int prerequisiteID, IObjectiveListener listener) {
+		super(scene, objectiveID, description, prerequisiteID, listener);
+
+		Load();
+	}
+
+	private void Load() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,17 @@
+package com.singletongames.vtol.objectives;
+
+import com.singletongames.vtol.LanderScene;
+
+public class LandingPadObjective extends Objective {
+
+	public LandingPadObjective(LanderScene scene, int objectiveID,	String description, IObjectiveListener listener) {
+		super(scene, objectiveID, description, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+	public LandingPadObjective(LanderScene scene, int objectiveID,	String description, int prerequisiteID, IObjectiveListener listener) {
+		super(scene, objectiveID, description, prerequisiteID, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+}

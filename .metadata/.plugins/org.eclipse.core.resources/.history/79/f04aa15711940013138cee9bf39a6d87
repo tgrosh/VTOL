@@ -1,0 +1,126 @@
+package com.singletongames.vtol.objectives;
+
+import com.singletongames.vtol.ILanderSceneListener;
+import com.singletongames.vtol.LanderScene;
+import com.singletongames.vtol.LandingPad;
+
+public class LandingPadObjective extends Objective implements ILanderSceneListener {
+
+	public LandingPadObjective(LanderScene scene, int objectiveID, int landingPadId, String description, IObjectiveListener listener) {
+		super(scene, objectiveID, description, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+	public LandingPadObjective(LanderScene scene, int objectiveID, int landingPadId, String description, int prerequisiteID, IObjectiveListener listener) {
+		super(scene, objectiveID, description, prerequisiteID, listener);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void onThrottleChange(float currentThrottle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPreviewComplete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPreviewStart() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCameraLookComplete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLanderTakeoff() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLanderTouchdown() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSafeLanding(LandingPad pad) {
+		if (pad.getId() == )
+	}
+
+	@Override
+	public void onSafeReturn() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLanderDestroy() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMissionFail() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMissionSuccess() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onObjectiveComplete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onObjectiveZoneEnter(ObjectiveZone objectiveZone) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onObjectiveZoneExit(ObjectiveZone objectiveZone) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onNoFlyEnter() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onNoFlyExit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCargoPickup() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCargoDeliver() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

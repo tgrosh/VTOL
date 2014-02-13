@@ -38,6 +38,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.singletongames.vtol.objectives.ObjectiveZone;
 
 public class Level implements IDisposable {	
 	private int mLevelID;
@@ -137,12 +138,12 @@ public class Level implements IDisposable {
 		
 		for (TMXObjectGroup grp:map.getTMXObjectGroups()){
 			for (TMXObject obj:grp.getTMXObjects()){
-				if (grp.getName().equals("Props") && physics){
+				if (grp.getName().equals("Props") && physics){ //just draw props
 					 ITextureRegion tex = map.getTextureRegionFromGlobalTileID(obj.getGid());
 					 Sprite prop = new Sprite(obj.getX(), obj.getY() - 120f, tex, Resources.mEngine.getVertexBufferObjectManager());
 					 scene.attachChild(prop);
 				}
-				else if (grp.getName().equals("Physics") && physics){
+				else if (grp.getName().equals("Physics") && physics){ //box2d physics layer
 					if (obj.getTMXObjectPolyline().isEmpty()){ //not a poly line, so a rectangle (we dotn support elipse)
 						Rectangle rect = new Rectangle(obj.getX(), obj.getY(), obj.getWidth(), obj.getHeight(), Resources.mEngine.getVertexBufferObjectManager());
 						rect.setVisible(false);
@@ -178,7 +179,7 @@ public class Level implements IDisposable {
 						}
 					}
 				}
-				else if (grp.getName().equals("Preview")){
+				else if (grp.getName().equals("Preview")){ //camera preview layer
 					if (!obj.getTMXObjectPolyline().isEmpty()){ //is a polyline
 						float startX = obj.getX();
 						float startY = obj.getY();
@@ -210,7 +211,7 @@ public class Level implements IDisposable {
 								scene.attachChild(zone);
 								objectiveZones.add(zone);
 							}
-						}							
+						}
 					}
 				}
 				else {
@@ -230,7 +231,8 @@ public class Level implements IDisposable {
 								this.launchPad = pad;
 							}
 							else if (tileProp.equals("LandingPad")){
-								LandingPad pad = new LandingPad(obj.getX() - Resources.LandingPad.getWidth()/2, obj.getY() - 60, null);
+								int id = Util.getTMXObjectProperty(obj.getTMXObjectProperties(), "id", -1);
+								LandingPad pad = new LandingPad(obj.getX() - Resources.LandingPad.getWidth()/2, obj.getY() - 60, id, null);
 								pad.setZIndex(10);
 								scene.attachChild(pad);
 								this.landingPad = pad;
@@ -238,15 +240,15 @@ public class Level implements IDisposable {
 							else if (tileProp.equals("Lander")){
 								switch (Resources.selectedLander){
 									case 0:{
-										lander = new BasicLander(obj.getX(), obj.getY());										
+										lander = new BasicLander(obj.getX(), obj.getY(), null);										
 										break;
 									}
 									case 1:{
-										lander = new LunarLander(obj.getX(), obj.getY());
+										lander = new LunarLander(obj.getX(), obj.getY(), null);
 										break;
 									}
 									default:{
-										lander = new BasicLander(obj.getX(), obj.getY());
+										lander = new BasicLander(obj.getX(), obj.getY(), null);
 									}
 								}
 								lander.setZIndex(20);

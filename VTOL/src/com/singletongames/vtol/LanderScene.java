@@ -30,6 +30,7 @@ import org.andengine.extension.tmx.TMXTiledMap;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.input.touch.detector.PinchZoomDetector;
 import org.andengine.input.touch.detector.SurfaceScrollDetector;
+import org.andengine.opengl.texture.region.TextureRegion;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
 import org.andengine.util.modifier.IModifier;
@@ -46,6 +47,11 @@ import android.view.Surface;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.singletongames.vtol.objectives.IObjectiveManagerListener;
+import com.singletongames.vtol.objectives.IObjectiveZoneListener;
+import com.singletongames.vtol.objectives.Objective;
+import com.singletongames.vtol.objectives.ObjectiveManager;
+import com.singletongames.vtol.objectives.ObjectiveZone;
 
 public class LanderScene extends GameScene implements SensorEventListener {
 	private Scene mThis = this;
@@ -58,20 +64,21 @@ public class LanderScene extends GameScene implements SensorEventListener {
 	Sprite throttleBackground;
 	boolean movingThrottle = false;
 	Text throttlePercent;
-	Rectangle fuelLevel;
-	ColorModifier fuelColorModifier;
 	boolean paused = false;
 	protected PinchZoomDetector mPinchZoomDetector;
 	private boolean mPreview;
-	private ButtonSprite pauseButton;
-	private Sprite fuelGaugeBackground;
-	private Sprite fuelGaugeOverlay;
+	private ButtonSprite pauseButton;	
 	private int fireworksCount;
 	private List<ILanderSceneListener> listeners = new ArrayList<ILanderSceneListener>();
 	ObjectiveManager objMgr;
 	int chapterID, levelID;
+	boolean sceneComplete = false;
 	
-	private Lander currentLander; 
+	private Lander currentLander;
+	private Sprite GaugeBackground;
+	private Sprite gaugeGreen;
+	private Sprite gaugeRed;
+	private Sprite pingButton; 
 	
 	public LanderScene(boolean preview, int chapterID, int levelID){
 		this.chapterID = chapterID;
@@ -107,6 +114,9 @@ public class LanderScene extends GameScene implements SensorEventListener {
 				if (Resources.mCurrentLevel != null && Resources.mCurrentLevel.getLander() != null){
                 	float fuelPct = Resources.mCurrentLevel.getLander().getCurrentFuelPercentage();
                 	updateFuel(fuelPct);
+                	
+                	float healthPct = Resources.mCurrentLevel.getLander().getCurrentHealthPercentage();
+                	updateHealth(healthPct);
                 }
 			}
 		});
@@ -126,6 +136,7 @@ public class LanderScene extends GameScene implements SensorEventListener {
                 if (mPreview && Resources.mCurrentLevel != null && Resources.mCurrentLevel.getPreview() != null){
                 	Resources.mCurrentLevel.getPreview().SkipToEnd();
                 }
+                LanderScene.this.setOnSceneTouchListener(null);
 				return true;
 			}
 		});
@@ -203,16 +214,11 @@ public class LanderScene extends GameScene implements SensorEventListener {
 		throttlePercent.setPosition(throttleButton.getX() + throttleButton.getWidth() + 30, throttleButton.getY() + throttleButton.getHeight()/2 - throttlePercent.getHeight()/2);
 		mHud.attachChild(throttlePercent);
 		
-		fuelGaugeBackground = new Sprite(30, 30, Resources.mFuelGaugeBackground, Resources.mEngine.getVertexBufferObjectManager());
-		fuelGaugeOverlay = new Sprite(30, 30, Resources.mFuelGaugeOverlay, Resources.mEngine.getVertexBufferObjectManager());
-		fuelLevel = new Rectangle(fuelGaugeBackground.getX() + 3f, fuelGaugeBackground.getY() + 10f, 74f, 300f, Resources.mEngine.getVertexBufferObjectManager());
-		fuelLevel.setScaleCenterY(fuelLevel.getHeight());		
-		fuelLevel.setColor(Color.GREEN);
-		
-		mHud.attachChild(fuelGaugeBackground);
-		mHud.attachChild(fuelLevel);
-		mHud.attachChild(fuelGaugeOverlay);
-
+		GaugeBackground = new Sprite(25, 30, Resources.GaugeBackground, Resources.mEngine.getVertexBufferObjectManager());
+		mHud.attachChild(GaugeBackground);		
+		updateFuel(1);
+		updateHealth(1);
+				
 		pauseButton = new ButtonSprite(0, 0, Resources.PauseButton, Resources.mEngine.getVertexBufferObjectManager(), new OnClickListener() {			
 			@Override
 			public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,	float pTouchAreaLocalY) {
@@ -240,11 +246,19 @@ public class LanderScene extends GameScene implements SensorEventListener {
 				LevelDB.getInstance().unlockLevel(chapterID, levelID+1); //unlock the next level
 				endScene(true);
 			}
+			@Override
+			public void onObjectiveComplete(Objective objective) {
+			}
+			@Override
+			public void onObjectiveFail(Objective objective) {
+			}
 		});
 		this.getHud().attachChild(objMgr);
 	}
 	
 	protected void endScene(boolean success) {
+		sceneComplete = true;
+		
 		disableThrottle();
 		currentLander.stopEngines();
 				
@@ -254,7 +268,7 @@ public class LanderScene extends GameScene implements SensorEventListener {
 				setHudElementsVisible(false);
 				
 				Text text1 = new Text(0,0,Resources.mFont_Green96, "MISSION", Resources.mEngine.getVertexBufferObjectManager());
-				text1.setPosition(Resources.CAMERA_WIDTH/2 - text1.getWidth()/2, Resources.CAMERA_HEIGHT/2 - text1.getHeight() + 20);
+				text1.setPosition(Resources.CAMERA_WIDTH/2 - text1.getWidth()/2, Resources.CAMERA_HEIGHT/2 - text1.getHeight() - 30);
 				text1.setScale(0f);				
 				text1.setScaleCenterY(text1.getHeight());
 				
@@ -265,7 +279,7 @@ public class LanderScene extends GameScene implements SensorEventListener {
 					@Override
 					public void onModifierFinished(IModifier<IEntity> pModifier, IEntity pItem) {
 						final Text text2 = new Text(0,0,Resources.mFont_Green96, "COMPLETE", Resources.mEngine.getVertexBufferObjectManager());
-						text2.setPosition(Resources.CAMERA_WIDTH/2 - text2.getWidth()/2, Resources.CAMERA_HEIGHT/2 - 20);
+						text2.setPosition(Resources.CAMERA_WIDTH/2 - text2.getWidth()/2, Resources.CAMERA_HEIGHT/2 - 70);
 						text2.setScale(0f);
 						text2.setScaleCenterY(0);
 						
@@ -347,6 +361,15 @@ public class LanderScene extends GameScene implements SensorEventListener {
 		});
 		currentLander = Resources.mCurrentLevel.getLander();
 		
+		currentLander.registerListener(new ILanderListener() {			
+			@Override
+			public void onTakeOff(Lander lander, LaunchPad pad) {
+				for (ILanderSceneListener l: listeners){
+					l.onLanderTakeoff();
+				}
+			}
+		});
+		
 		TMXTiledMap map = Resources.mCurrentLevel.getMap();
 		float mapHeight = map.getTileRows() * map.getTileHeight();
 		float mapWidth = map.getTileColumns() * map.getTileWidth();		
@@ -405,9 +428,11 @@ public class LanderScene extends GameScene implements SensorEventListener {
 			IPhysicsSpriteListener landingPadListener = new IPhysicsSpriteListener() {			
 				@Override
 				public void onContact(Fixture fixtureA, Fixture fixtureB) {
-					if (fixtureA.getUserData() != null && fixtureA.getUserData().equals("LandingPad") &&
-							fixtureB.getUserData() != null && fixtureB.getUserData().equals("LanderBase")){
-						ShowFireworks(Resources.mCurrentLevel.getLandingPad().getX() + Resources.mCurrentLevel.getLandingPad().getWidth()/2, Resources.mCurrentLevel.getLandingPad().getY() - 200f);
+					if (fixtureA.getUserData() != null && fixtureA.getUserData().equals("LandingPad") && fixtureB.getUserData() != null && fixtureB.getUserData().equals("LanderBase")){
+						//ShowFireworks(Resources.mCurrentLevel.getLandingPad().getX() + Resources.mCurrentLevel.getLandingPad().getWidth()/2, Resources.mCurrentLevel.getLandingPad().getY() - 200f);
+						for(ILanderSceneListener l: listeners){
+							l.onSafeLanding((LandingPad) fixtureA.getBody().getUserData());
+						}
 					}
 				}
 			};
@@ -450,36 +475,29 @@ public class LanderScene extends GameScene implements SensorEventListener {
 		}
 		else {
 			this.unregisterTouchArea(throttleButton);
-		}		
-		fuelGaugeBackground.setVisible(visible);
-		fuelLevel.setVisible(visible);
-		fuelGaugeOverlay.setVisible(visible);
+		}	
+		GaugeBackground.setVisible(visible);
 		pauseButton.setVisible(visible);
 		throttlePercent.setVisible(visible);
 		if (objMgr != null) objMgr.setVisible(visible);
 	}
 
 	private void updateFuel(float currentFuelPercent){
-		fuelLevel.setScaleY(currentFuelPercent);
-		
-		if (currentFuelPercent < .75 && currentFuelPercent > .25f){
-			if (fuelColorModifier == null || fuelColorModifier.isFinished()){
-				fuelColorModifier = new ColorModifier(1f, fuelLevel.getColor(), Color.YELLOW);
-				fuelLevel.registerEntityModifier(fuelColorModifier);
-			}
-		}
-		else if (currentFuelPercent >= .75){
-			if (fuelColorModifier == null || fuelColorModifier.isFinished()){
-				fuelColorModifier = new ColorModifier(1f, fuelLevel.getColor(), Color.GREEN);
-				fuelLevel.registerEntityModifier(fuelColorModifier);
-			}
-		}
-		else if (currentFuelPercent <= .25){
-			if (fuelColorModifier == null || fuelColorModifier.isFinished()){
-				fuelColorModifier = new ColorModifier(1f, fuelLevel.getColor(), Color.RED);
-				fuelLevel.registerEntityModifier(fuelColorModifier);
-			}
-		}
+		TextureRegion texGreen = Resources.GaugeGreen.deepCopy();
+		float texHeight = texGreen.getHeight()*currentFuelPercent;
+		texGreen.setTextureHeight(texHeight);
+		if (gaugeGreen != null && gaugeGreen.hasParent()) gaugeGreen.detachSelf();
+		gaugeGreen = new Sprite(24, 44 + (Resources.GaugeGreen.getHeight() - texHeight), texGreen, Resources.mEngine.getVertexBufferObjectManager());
+		GaugeBackground.attachChild(gaugeGreen);		
+	}
+	
+	private void updateHealth(float currentHealthPercent){
+		TextureRegion texRed = Resources.GaugeRed.deepCopy();
+		float texHeight = texRed.getHeight()*currentHealthPercent;
+		texRed.setTextureHeight(texHeight);
+		if (gaugeRed != null && gaugeRed.hasParent()) gaugeRed.detachSelf();
+		gaugeRed = new Sprite(52, 44 + (Resources.GaugeRed.getHeight() - texHeight), texRed, Resources.mEngine.getVertexBufferObjectManager());
+		GaugeBackground.attachChild(gaugeRed);		
 	}
 			
 	@Override
@@ -572,7 +590,12 @@ public class LanderScene extends GameScene implements SensorEventListener {
 
 	@Override
 	public void Back() {
-		Pause();
+		if (!sceneComplete)	{
+			Pause();
+		}
+		else {
+			MainMenu();
+		}
 		super.Back();
 	}
 

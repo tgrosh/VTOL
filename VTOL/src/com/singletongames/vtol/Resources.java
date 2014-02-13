@@ -60,6 +60,7 @@ public class Resources {
 	public static TextureRegion LaunchPad, LandingPad, vtol_logo, titleBar, LanderSelectLocked, TipFrame, TipArrow;
 	public static TiledTextureRegion ExplosionSequence, fireworks;
 	public static TextureRegion ObjectiveBullet, ObjectiveCheck, WoodenBox, ChainLink;
+	public static TextureRegion GaugeBackground, GaugeGreen, GaugeRed, PingButton;
 	
 	public static TextureRegion smokeParticle;
 	
@@ -146,6 +147,10 @@ public class Resources {
 			ObjectiveCheck = Util.GetTextureRegion("gfx/ObjectiveCheck.png");
 			WoodenBox = Util.GetTextureRegion("gfx/WoodenBox.png");
 			ChainLink = Util.GetTextureRegion("gfx/ChainLink.png");
+			GaugeBackground = Util.GetTextureRegion("gfx/GaugeBackground.png");
+			GaugeGreen = Util.GetTextureRegion("gfx/GaugeGreen.png");
+			GaugeRed = Util.GetTextureRegion("gfx/GaugeRed.png");
+			PingButton = Util.GetTextureRegion("gfx/PingButton.png");
 			
 			landerDebris[0] = Util.GetTextureRegion("gfx/LanderDebris1.png");
 			landerDebris[1] = Util.GetTextureRegion("gfx/LanderDebris2.png");

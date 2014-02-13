@@ -1,0 +1,100 @@
+package com.singletongames.vtol.objectives;
+ 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.andengine.entity.scene.Scene;
+import org.andengine.util.SAXUtils;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+ 
+import com.badlogic.gdx.math.Vector2;
+import com.singletongames.vtol.LanderScene;
+import com.singletongames.vtol.SafeReturnObjective;
+ 
+public class ObjectiveParser extends DefaultHandler
+{	
+        private final StringBuilder mStringBuilder = new StringBuilder();
+        
+        List<Objective> objectives = new ArrayList<Objective>();
+ 
+        boolean chapterFound, levelFound;
+		int chapterID;
+		int levelID;
+		LanderScene scene;
+		IObjectiveListener objectiveListener;
+		
+        public ObjectiveParser(LanderScene scene, int chapterID, int levelID, IObjectiveListener objectiveListener)
+        {
+        	this.scene = scene;
+        	this.chapterID = chapterID;
+        	this.levelID = levelID;
+        	this.objectiveListener = objectiveListener;
+        }
+              
+        // ===========================================================
+        // Methods for/from SuperClass/Interfaces
+        // ===========================================================
+       
+        @Override
+        public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
+        {
+        	if(localName.equals("game")){
+        		
+        	}
+        	else if(localName.equals("objectives")){
+        		
+        	}
+        	else if(localName.equals("chapter")){
+        		int id = SAXUtils.getIntAttributeOrThrow(attributes, "id");
+        		if (id == chapterID){
+        			chapterFound = true;
+        		}
+        		else{
+        			chapterFound = false;
+        		}
+        	}
+        	else if(localName.equals("level") && chapterFound){
+        		int id = SAXUtils.getIntAttributeOrThrow(attributes, "id");
+        		if (id == levelID){
+        			levelFound = true;
+        		}
+        		else{
+        			levelFound = false;
+        		}
+        	}
+        	else if(localName.equals("objective"))
+            {
+        		if (levelFound && chapterFound){
+	                int id = SAXUtils.getIntAttributeOrThrow(attributes, "id");
+	                String description = SAXUtils.getAttributeOrThrow(attributes, "description");
+	                String type = SAXUtils.getAttributeOrThrow(attributes, "type");
+	                int prerequisiteID = SAXUtils.getIntAttribute(attributes, "prerequisiteId", -1);
+	                
+	                if (type.equals("ZoneObjective")){
+	                	int objectiveZoneID = SAXUtils.getIntAttributeOrThrow(attributes, "objectiveZoneID");
+		                objectives.add(new ZoneObjective(scene, id, objectiveZoneID, description, prerequisiteID, objectiveListener));
+	                }
+	                else if (type.equals("SafeReturnObjective")){
+	                	objectives.add(new SafeReturnObjective(scene, id, description, prerequisiteID, objectiveListener));
+	                }
+        		}
+            }
+            else
+            {
+                    throw new SAXException("Unexpected start tag: '" + localName + "'.");
+            }
+        }
+       
+        @Override
+        public void characters(final char[] pCharacters, final int pStart, final int pLength) throws SAXException
+        {
+            this.mStringBuilder.append(pCharacters, pStart, pLength);
+        }
+
+		public List<Objective> getObjectives() {
+			return objectives;
+		}
+       
+}

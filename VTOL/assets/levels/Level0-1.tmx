@@ -39,6 +39,11 @@
    </properties>
   </tile>
  </tileset>
+ <layer name="Background" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt1rkNAjEURVHnA7TA0gJLCzA0w9J/wEtBPxlnWOdIN/hy/uSptbZK67RJ08J7VNu0S/t06LhHdUyndE6XjntU13RLc7p33KNauif2xb787scjPdMrvYt3+2Jf7Ms3+1Lzf6nZl5o9qdmTmj2p2RMAAAAAAAAAAAAAAAAAAPg/H4QvKMk=
+  </data>
+ </layer>
  <layer name="Tile Layer 1" width="70" height="70">
   <data encoding="base64" compression="zlib">
    eJzt20EKwjAQQNF4CSviCax3UMT7n8l0UXAhlTYlzMhb/PWEF7IJzFhKGfW1c+2+okvHWVtqOd9nt9phRdeOs7bUcj4uXLhw4ZLD5Vh7cdl9Jpf8Ls/a6ces6f0Mpe0NZXOZbYaFWj2yuvSKCxcuXLhwiRAXLv/q0uMveu6RyKXHHfaMCxcuXLhwiRAXLly4cOESIS5cuHDhwiVCXLhw4cKFS4S4cOHChQuXCHHhwoULFy4R2nMva2n3KFt77UpJkiQpf2++mZ5I

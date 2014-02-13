@@ -1,0 +1,199 @@
+package com.singletongames.vtol;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Objective implements ILanderSceneListener {
+	public enum ObjectiveStatus{
+		INPROGRESS,
+		COMPLETE,
+		FAILED
+	}
+	protected ObjectiveStatus status = ObjectiveStatus.INPROGRESS;
+	protected List<IObjectiveListener> listeners = new ArrayList<IObjectiveListener>();
+	private boolean notified = false;
+	LanderScene scene;
+	private String description; 
+	int prerequisiteID = -1;
+	int objectiveID;
+	
+	public Objective(LanderScene scene, int objectiveID, String description, IObjectiveListener listener){
+		this.objectiveID = objectiveID;
+		this.scene = scene;
+		this.description = description;		
+		this.listeners.add(listener);
+	}
+	
+	public Objective(LanderScene scene, int objectiveID, String description, int prerequisiteID, IObjectiveListener listener){
+		this.objectiveID = objectiveID;
+		this.scene = scene;
+		this.description = description;
+		this.prerequisiteID = prerequisiteID;
+		this.listeners.add(listener);
+	}
+		
+	public List<IObjectiveListener> getListeners() {
+		return listeners;
+	}
+	
+	public void addListener(IObjectiveListener listener) {
+		listeners.add(listener);
+	}
+	
+	protected void setComplete(){
+		if (this.status != ObjectiveStatus.COMPLETE) notified = false;
+		this.status = ObjectiveStatus.COMPLETE;
+		if (!notified){
+			for (IObjectiveListener listener: listeners){
+				listener.onComplete(this);
+			}
+		}
+		notified = true;
+	}
+	
+	protected void setFailed(){
+		if (this.status != ObjectiveStatus.FAILED) notified = false;
+		this.status = ObjectiveStatus.FAILED;
+		if (!notified){
+			for (IObjectiveListener listener: listeners){
+				listener.onFail(this);
+			}
+		}
+		notified = true;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getObjectiveID() {
+		return objectiveID;
+	}
+
+	
+	public ObjectiveStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ObjectiveStatus status) {
+		this.status = status;
+		notified = false;
+	}
+
+	public int getPrerequisiteID() {
+		return prerequisiteID;
+	}
+
+	@Override
+	public void onThrottleChange(float currentThrottle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPreviewComplete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPreviewStart() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCameraLookComplete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLanderTakeoff() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLanderTouchdown() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSafeLanding(LandingPad pad) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSafeReturn() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLanderDestroy() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMissionFail() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMissionSuccess() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onObjectiveComplete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onObjectiveZoneEnter(ObjectiveZone objectiveZone) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onObjectiveZoneExit(ObjectiveZone objectiveZone) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onNoFlyEnter() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onNoFlyExit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCargoPickup() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCargoDeliver() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

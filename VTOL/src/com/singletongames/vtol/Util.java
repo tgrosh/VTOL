@@ -507,7 +507,7 @@ public class Util {
 		return result;		
 	}
 
-	static FixtureDef createPolygonFixtureDef(Vector2[] vertices, FixtureDef def) {
+	public static FixtureDef createPolygonFixtureDef(Vector2[] vertices, FixtureDef def) {
 		PolygonShape basePoly;
 		basePoly = new PolygonShape();
 		basePoly.set(vertices);

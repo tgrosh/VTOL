@@ -1,5 +1,7 @@
 package com.singletongames.vtol;
 
+import com.singletongames.vtol.objectives.ObjectiveZone;
+
 public interface ILanderSceneListener {
 	public void onThrottleChange(float currentThrottle);
 	public void onPreviewComplete();

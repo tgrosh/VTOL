@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="70" height="70" tilewidth="60" tileheight="60">
+ <tileset firstgid="1" name="Metal Terrain" tilewidth="60" tileheight="60">
+  <image source="levels/tiles/fwMetalTerrrain.png" width="1200" height="800"/>
+  <terraintypes>
+   <terrain name="Metal" tile="42"/>
+   <terrain name="Backdrop" tile="0"/>
+  </terraintypes>
+  <tile id="0" terrain="1,1,1,1"/>
+  <tile id="21" terrain="1,1,1,0"/>
+  <tile id="22" terrain="1,1,0,0"/>
+  <tile id="23" terrain="1,1,0,1"/>
+  <tile id="25" terrain="0,0,0,1"/>
+  <tile id="27" terrain="0,0,1,0"/>
+  <tile id="41" terrain="1,0,1,0"/>
+  <tile id="42" terrain="0,0,0,0"/>
+  <tile id="43" terrain="0,1,0,1"/>
+  <tile id="61" terrain="1,0,1,1"/>
+  <tile id="62" terrain="0,0,1,1"/>
+  <tile id="63" terrain="0,1,1,1"/>
+  <tile id="65" terrain="0,1,0,0"/>
+  <tile id="67" terrain="1,0,0,0"/>
+ </tileset>
+ <tileset firstgid="261" name="Lander Objects" tilewidth="60" tileheight="60">
+  <tileoffset x="0" y="30"/>
+  <tile id="0">
+   <properties>
+    <property name="type" value="Lander"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="type" value="LaunchPad"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="type" value="LandingPad"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Background" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt1rkNAjEURdHJB2iBpQWWFliaYek/4KVITiyNA+NzpBt8OX/yPE3TKq3TJs0L373apl3ap0ODu1fHdErndGlw9+qabumeHg3uXi29J/ZlvH15pld6p0/h3b7YF/vyy76U+b+U2ZeyUfai1ih7UWuUvag1yl4AAAAAAAAAAAAAAAAAAMA/+QL+aji5
+  </data>
+ </layer>
+ <layer name="Tile Layer 1" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt20EKwjAURdG4CRVxBdY9KOL+12QmmRVStQ0/6Rnc8YMT0kEhU0pp0myX3GODrg23aru/dM8dNujWcKu2y4ULFy5cxnI55k4Le+/I5d9NLv27vHLnyla5P3N3Y1SXYvPtt2IPLq3iwoULFy5cIsSFy6guLf5Fl54dubQ4w5Zx4cKFCxcuEeLChQsXLlwixIULFy5cuESICxcuXLhwiRAXLly4cOESIS5cuHDhwiVCa77LWvpmsYfWeislSZKk/vsACyGUcA==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1" width="70" height="70">
+  <object gid="281" x="386" y="747"/>
+  <object gid="261" x="356" y="732"/>
+  <object gid="282" x="1065" y="508">
+   <properties>
+    <property name="objectiveId" value="0"/>
+   </properties>
+  </object>
+  <object gid="94" x="647" y="95"/>
+ </objectgroup>
+ <objectgroup color="#00aaff" name="Physics" width="70" height="70">
+  <object x="748" y="508" width="724" height="182"/>
+  <object x="629" y="689" width="116" height="59"/>
+  <object x="87" y="688" width="61" height="57"/>
+  <object x="149" y="748" width="481" height="49"/>
+  <object x="81" y="37" width="1388" height="51"/>
+  <object x="33" y="85" width="55" height="604"/>
+  <object x="1411" y="89" width="60" height="419"/>
+ </objectgroup>
+ <objectgroup color="#aaff00" name="Objectives" width="70" height="70"/>
+</map>
