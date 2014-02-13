@@ -1,5 +1,6 @@
 package com.singletongames.vtol;
 
+import org.andengine.engine.camera.SmoothCamera;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.entity.sprite.Sprite;
@@ -13,6 +14,7 @@ public class LevelSelectScene extends GameScene {
 	
 	public LevelSelectScene(int chapterID) {
 		this.chapterID = chapterID;
+		Util.ResetCamera((SmoothCamera) Resources.mEngine.getCamera());
 		
 		Load();
 	}

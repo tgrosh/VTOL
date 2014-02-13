@@ -11,6 +11,7 @@ import org.xml.sax.helpers.DefaultHandler;
  
 import com.badlogic.gdx.math.Vector2;
 import com.singletongames.vtol.LanderScene;
+import com.singletongames.vtol.Resources;
  
 public class ObjectiveParser extends DefaultHandler
 {	
@@ -77,6 +78,15 @@ public class ObjectiveParser extends DefaultHandler
 	                if (type.equals("ZoneObjective")){
 	                	int objectiveZoneID = SAXUtils.getIntAttributeOrThrow(attributes, "objectiveZoneID");
 		                objectives.add(new ZoneObjective(manager, scene, id, objectiveZoneID, description, hidden, prerequisiteID, objectiveListener));
+	                }
+	                else if (type.equals("WaypointObjective")){
+	                	int objectiveZoneID = SAXUtils.getIntAttributeOrThrow(attributes, "objectiveZoneID");
+	                	ObjectiveZone zone = Resources.mCurrentLevel.getObjectiveZone(objectiveZoneID);
+	                	if (zone != null){
+		                	float centerX = Resources.mCurrentLevel.getObjectiveZone(objectiveZoneID).getX() + Resources.mCurrentLevel.getObjectiveZone(objectiveZoneID).getWidth()/2; 
+		                	float centerY = Resources.mCurrentLevel.getObjectiveZone(objectiveZoneID).getY() + Resources.mCurrentLevel.getObjectiveZone(objectiveZoneID).getHeight()/2;
+			                objectives.add(new WaypointObjective(manager, scene, id, objectiveZoneID, description, prerequisiteID, new Vector2(centerX, centerY) , objectiveListener));
+	                	}
 	                }
 	                else if (type.equals("SafeReturnObjective")){
 	                	objectives.add(new SafeReturnObjective(manager, scene, id, description, hidden, prerequisiteID, objectiveListener));

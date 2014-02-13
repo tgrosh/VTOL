@@ -9,9 +9,11 @@ import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.entity.IEntity;
+import org.andengine.entity.modifier.AlphaModifier;
 import org.andengine.entity.modifier.ColorModifier;
 import org.andengine.entity.modifier.DelayModifier;
 import org.andengine.entity.modifier.IEntityModifier.IEntityModifierListener;
+import org.andengine.entity.modifier.ParallelEntityModifier;
 import org.andengine.entity.modifier.ScaleModifier;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.IOnSceneTouchListener;
@@ -26,6 +28,7 @@ import org.andengine.entity.sprite.ButtonSprite.OnClickListener;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
+import org.andengine.extension.debugdraw.primitives.Ellipse;
 import org.andengine.extension.tmx.TMXTiledMap;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.input.touch.detector.PinchZoomDetector;
@@ -52,6 +55,7 @@ import com.singletongames.vtol.objectives.IObjectiveZoneListener;
 import com.singletongames.vtol.objectives.Objective;
 import com.singletongames.vtol.objectives.ObjectiveManager;
 import com.singletongames.vtol.objectives.ObjectiveZone;
+import com.singletongames.vtol.objectives.WaypointObjective;
 
 public class LanderScene extends GameScene implements SensorEventListener {
 	private Scene mThis = this;
@@ -70,7 +74,7 @@ public class LanderScene extends GameScene implements SensorEventListener {
 	private ButtonSprite pauseButton;	
 	private int fireworksCount;
 	private List<ILanderSceneListener> listeners = new ArrayList<ILanderSceneListener>();
-	ObjectiveManager objMgr;
+	ObjectiveManager objMgr;	
 	int chapterID, levelID;
 	boolean sceneComplete = false;
 	
@@ -78,7 +82,8 @@ public class LanderScene extends GameScene implements SensorEventListener {
 	private Sprite GaugeBackground;
 	private Sprite gaugeGreen;
 	private Sprite gaugeRed;
-	private Sprite pingButton; 
+	private Sprite pingButton;
+	private boolean pingEnabled; 
 	
 	public LanderScene(boolean preview, int chapterID, int levelID){
 		this.chapterID = chapterID;
@@ -240,6 +245,7 @@ public class LanderScene extends GameScene implements SensorEventListener {
 		
         LoadTMXLevel();
 		
+        //must be done after TMX map is loaded
 		objMgr = new ObjectiveManager(this, new Rectangle(Resources.CAMERA_WIDTH - 300, 50, 300, Resources.CAMERA_HEIGHT - 250, Resources.mEngine.getVertexBufferObjectManager()), Resources.mCurrentLevel.getChapterID(), Resources.mCurrentLevel.getLevelID(), new IObjectiveManagerListener() {
 			@Override
 			public void onAllObjectivesComplete() {
@@ -254,8 +260,55 @@ public class LanderScene extends GameScene implements SensorEventListener {
 			}
 		});
 		this.getHud().attachChild(objMgr);
+		
+		if (objMgr.getCurrentWaypoint() != null){
+			setPingEnabled(true);
+		}
 	}
 	
+	protected void createPing(final Vector2 center) {
+		final int pingCount = 5;
+		Resources.PingSound.play();
+		TimerHandler pingTimer = new TimerHandler(.2f, true, new ITimerCallback() {			
+			private int currentPing = 1;
+
+			@Override
+			public void onTimePassed(TimerHandler pTimerHandler) {
+				Ellipse circle = new Ellipse(center.x, center.y, 1f, 1f, Resources.mEngine.getVertexBufferObjectManager());
+				circle.setLineWidth(5f);
+				circle.setColor(0f,.8f,0f);
+				Vector2 landerPosition = new Vector2(Resources.mCurrentLevel.getLander().getX(), Resources.mCurrentLevel.getLander().getY());
+				float distanceToLander = Util.getPointDistance(landerPosition, center);
+				
+				ScaleModifier scaler = new ScaleModifier(1f, 1f, Math.abs(distanceToLander), new IEntityModifierListener() {					
+					@Override
+					public void onModifierStarted(IModifier<IEntity> pModifier, IEntity pItem) {
+					}
+					@Override
+					public void onModifierFinished(IModifier<IEntity> pModifier, final IEntity pItem) {
+						Resources.mEngine.runOnUpdateThread(new Runnable() {							
+							@Override
+							public void run() {
+								pItem.detachSelf();
+							}
+						});
+					}
+				});
+				AlphaModifier alpha = new AlphaModifier(1f, 1, 0, EaseStrongIn.getInstance());
+				ParallelEntityModifier par = new ParallelEntityModifier(scaler, alpha);
+				
+				circle.registerEntityModifier(par);
+				LanderScene.this.attachChild(circle);
+				
+				if (currentPing == pingCount){
+					Resources.mEngine.unregisterUpdateHandler(pTimerHandler);
+				}
+				currentPing++;
+			}
+		});
+		Resources.mEngine.registerUpdateHandler(pingTimer);
+	}
+
 	protected void endScene(boolean success) {
 		sceneComplete = true;
 		
@@ -440,6 +493,40 @@ public class LanderScene extends GameScene implements SensorEventListener {
 		}
 	}
 	
+	private void setPingEnabled(boolean enabled){
+		pingEnabled = enabled;
+		
+		if (pingEnabled){
+			pingButton = new Sprite(Resources.CAMERA_WIDTH - Resources.PingButton.getWidth() - 10, Resources.CAMERA_HEIGHT/2 - Resources.PingButton.getHeight()/2, Resources.PingButton, Resources.mEngine.getVertexBufferObjectManager()){
+				@Override
+				public boolean onAreaTouched(TouchEvent pSceneTouchEvent,float pTouchAreaLocalX, float pTouchAreaLocalY) {
+					if (!paused){
+						if (pSceneTouchEvent.isActionDown()){
+							//ping the center of the next waypoint, if there is one
+							WaypointObjective wp = objMgr.getCurrentWaypoint();
+							if (wp != null){
+								createPing(wp.getCenter());
+							}
+						}
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+				
+			};		
+			mHud.attachChild(pingButton);
+			mHud.registerTouchArea(pingButton);
+		}
+		else{
+			if (pingButton != null && pingButton.hasParent()){
+				pingButton.detachSelf();
+				mHud.unregisterTouchArea(pingButton);
+			}
+		}
+	}
+	
 	protected void ShowFireworks(final float x, final float y) {
 		fireworksCount = 5;
 		
@@ -476,6 +563,15 @@ public class LanderScene extends GameScene implements SensorEventListener {
 		else {
 			this.unregisterTouchArea(throttleButton);
 		}	
+		if (pingButton != null && pingButton.hasParent()){
+			pingButton.setVisible(visible);
+			if (visible){
+				this.registerTouchArea(pingButton);
+			}
+			else {
+				this.unregisterTouchArea(pingButton);
+			}	
+		}		
 		GaugeBackground.setVisible(visible);
 		pauseButton.setVisible(visible);
 		throttlePercent.setVisible(visible);

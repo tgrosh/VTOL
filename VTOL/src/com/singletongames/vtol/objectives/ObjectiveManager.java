@@ -42,7 +42,8 @@ public class ObjectiveManager extends Rectangle {
 	int chapterID;	
 	int levelID;
 	List<IObjectiveManagerListener> listeners = new ArrayList<IObjectiveManagerListener>();
-		
+	WaypointObjective currentWaypoint;
+	
 	public ObjectiveManager(LanderScene scene, RectangularShape drawArea, int chapterID, int levelID, IObjectiveManagerListener listener) {
 		super(drawArea.getX(), drawArea.getY(), drawArea.getWidth(), drawArea.getHeight(), Resources.mEngine.getVertexBufferObjectManager());
 		this.scene = scene;
@@ -87,9 +88,11 @@ public class ObjectiveManager extends Rectangle {
 							listener.onAllObjectivesComplete();
 						}
 					}
+					currentWaypoint = getNextWaypointObjective();
 				}
 				@Override
 				public void onFail(Objective objective) {
+					currentWaypoint = getNextWaypointObjective();
 				}
 			});
 	        xmlReader.setContentHandler(objectiveParser);
@@ -103,6 +106,7 @@ public class ObjectiveManager extends Rectangle {
     				this.visibleObjectives.add(objective);
     			}
     		}
+            currentWaypoint = getNextWaypointObjective();
             
             inputStream.close();            
 		} 
@@ -125,6 +129,17 @@ public class ObjectiveManager extends Rectangle {
 		}
 		return null;
 	}
+
+	private WaypointObjective getNextWaypointObjective(){
+		for (Objective obj: objectives){
+			if (obj.getClass().equals(WaypointObjective.class) && obj.getStatus() != ObjectiveStatus.COMPLETE){
+				return (WaypointObjective) obj;
+			}
+		}
+		
+		return null;
+	}
+	
 	
 	protected void showCheckMark(int objectivePosition) {
 		if (objectivePosition >= 0){
@@ -182,6 +197,11 @@ public class ObjectiveManager extends Rectangle {
 
 	public void addListener(IObjectiveManagerListener listener) {
 		this.listeners.add(listener);
+	}
+
+	
+	public WaypointObjective getCurrentWaypoint() {
+		return currentWaypoint;
 	}
 
 }

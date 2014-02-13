@@ -204,7 +204,7 @@ public class Level implements IDisposable {
 				else if (grp.getName().equals("Objectives")){
 					if (obj.getTMXObjectPolyline().isEmpty()){ //not a poly line, so a rectangle						
 						String type = Util.getTMXObjectProperty(obj.getTMXObjectProperties(), "type", "");
-						if (type.equals("ZoneObjective")){
+						if (type.equals("ZoneObjective") || type.equals("ObjectiveZone")){
 							int id = Util.getTMXObjectProperty(obj.getTMXObjectProperties(), "id", -1);
 							if (id >= 0){
 								ObjectiveZone zone = new ObjectiveZone(obj.getX(), obj.getY(), obj.getWidth(), obj.getHeight(), id);
@@ -329,5 +329,14 @@ public class Level implements IDisposable {
 
 	public List<ObjectiveZone> getObjectiveZones() {
 		return objectiveZones;
+	}
+
+	public ObjectiveZone getObjectiveZone(int objectiveZoneId){
+		for (ObjectiveZone z: objectiveZones){
+			if (z.getId() == objectiveZoneId){
+				return z;
+			}
+		}
+		return null;
 	}
 }

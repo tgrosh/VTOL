@@ -47,7 +47,7 @@
  </layer>
  <layer name="Tile Layer 1" width="70" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt2GEKgjAYgOF1CYvoBNkZKqL7n8lFBBIt0eVy+Px4fg79XtSpbQihBQAAAAAAAKC4fXQp7JB5/P76uZyiTWHHzOP31+vy1ER3Xf5yreiiS21dbtH2g11FXZrEDCk5s6XOa4ldxp5Tzmy6LLPL4/5OXe/v98/Y94aau7zafHtOTH2Pqr3LXFKzncPwN9B1hV1+tcfXShdddMk3tM9NUeIfAwAAAAAAAKxdB4ZF9Q8=
+   eJzt2FEKgjAcwOF1CYvoBNkZKqL7n8n1IEEwRafL4ffwPQ79/1CntiGEFgAAAAAAAIDiztGjsEvmsfv1a7pFh8Kumcfu1+vy1URvXf5yreiiS01dXtEx4VRRl2ZgjqVnS53XFrtMPaec2XTZZpfPPZ663n/vn6nvDTV36dsMPSfmvkfV3mUtqdnuYfwb6LnDLkvs8TXTRRdd8o3tc3OU+McAAAAAAAAAe9cBrfT0PQ==
   </data>
  </layer>
  <objectgroup name="Object Layer 1" width="70" height="70">

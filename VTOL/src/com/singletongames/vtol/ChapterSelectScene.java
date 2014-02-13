@@ -14,6 +14,7 @@ public class ChapterSelectScene extends GameScene {
 	private HUD mHud;
 	
 	public ChapterSelectScene() {
+		Util.ResetCamera((SmoothCamera) Resources.mEngine.getCamera());
 		Load();
 	}
 

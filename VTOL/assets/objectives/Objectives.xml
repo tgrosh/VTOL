@@ -16,9 +16,9 @@
 		<level id="3">
 			<objectives>
 				<objective id="0" type="TakeoffObjective" description="Take Off" />
-				<objective id="1" type="ZoneObjective" description="wp1" objectiveZoneID="0" hidden="true" prerequisiteId="0" />
-				<objective id="2" type="ZoneObjective" description="wp2" objectiveZoneID="1" hidden="true" prerequisiteId="1" />
-				<objective id="3" type="ZoneObjective" description="wp3" objectiveZoneID="2" hidden="true" prerequisiteId="2" />
+				<objective id="1" type="WaypointObjective" description="wp1" objectiveZoneID="0" hidden="true" prerequisiteId="0" />
+				<objective id="2" type="WaypointObjective" description="wp2" objectiveZoneID="1" hidden="true" prerequisiteId="1" />
+				<objective id="3" type="WaypointObjective" description="wp3" objectiveZoneID="2" hidden="true" prerequisiteId="2" />
  				<objective id="4" type="LandingPadObjective" description="Land Safely on the Landing Pad" prerequisiteId="3" landingPadId="0" />  				
 			</objectives>
 		</level>

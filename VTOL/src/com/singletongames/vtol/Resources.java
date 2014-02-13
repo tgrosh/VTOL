@@ -101,7 +101,7 @@ public class Resources {
 	public static Font mFont_Green18;
 	public static Font mFont_Green24;
 	
-	public static Sound RocketEngine0, LanderExplosion;
+	public static Sound RocketEngine0, LanderExplosion, PingSound;
 	
 	public static Sound mRolling, timertick, timergotick, ButtonSound1,ButtonSound2,ButtonSound3,ButtonSound4, ButtonSound1rev,ButtonSound2rev,ButtonSound3rev,ButtonSound4rev;
 	public static Sound mSoundDing1, mSoundDing2, mSoundDing3, mKidsCheer, mBallBounce1, mBallBounce2, mBallBounce3, mBallBounce4, mTrampBounce, mWooshIn, mWooshOut, mFail;
@@ -194,6 +194,7 @@ public class Resources {
 			RocketEngine0 = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), pActivity, "sfx/RocketEngine0.ogg");
 			RocketEngine0.setLooping(true);
 			LanderExplosion = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), pActivity, "sfx/LanderExplosion.ogg");
+			PingSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), pActivity, "sfx/Ping.ogg");
 			
 			mFont_Green96 = Util.GetGradientStrokeFont(96, Util.SimpletonTextColorScheme.GRADIENT_GREEN,Color.BLACK, 4, true, mEngine);
 			mFont_Yellow96 = Util.GetGradientStrokeFont(96, Util.SimpletonTextColorScheme.GRADIENT_REDORANGE,Color.BLACK, 4, true, mEngine);

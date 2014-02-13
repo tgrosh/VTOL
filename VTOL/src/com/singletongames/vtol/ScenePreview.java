@@ -72,9 +72,7 @@ public class ScenePreview {
 		modifiers.add(delay);
 		
 		for (Vector2 point: previewPoints){
-			float a = point.x - previousPoint.x;
-			float b = point.y - previousPoint.y;
-			float c = (float) Math.sqrt(Math.abs(a*a) + Math.abs(b*b));
+			float c = Util.getPointDistance(point, previousPoint);
 			float duration = c / camera.getMaxVelocityX();
 			
 			MoveModifier mover = new MoveModifier(duration, previousPoint.x, point.x, previousPoint.y, point.y, EaseSineInOut.getInstance());			

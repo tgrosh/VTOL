@@ -516,7 +516,13 @@ public class Util {
 		return def;
 	}
 	
-	
+	public static float getPointDistance(Vector2 pointA, Vector2 pointB){
+		float a = pointA.x - pointB.x;
+		float b = pointA.y - pointB.y;
+		float c = (float) Math.sqrt(Math.abs(a*a) + Math.abs(b*b));
+		
+		return c;
+	}
 	
 	public static void CenterScreen(RectangularShape object){
 		object.setPosition(Resources.CAMERA_WIDTH/2 - object.getWidth()/2, Resources.CAMERA_HEIGHT/2 - object.getHeight()/2);

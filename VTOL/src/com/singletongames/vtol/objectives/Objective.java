@@ -44,6 +44,7 @@ public class Objective implements IObjectiveManagerListener {
 		this.hidden = hidden;
 	}
 		
+	
 	public List<IObjectiveListener> getListeners() {
 		return listeners;
 	}
@@ -93,7 +94,6 @@ public class Objective implements IObjectiveManagerListener {
 	public int getObjectiveID() {
 		return objectiveID;
 	}
-
 	
 	public ObjectiveStatus getStatus() {
 		return status;
