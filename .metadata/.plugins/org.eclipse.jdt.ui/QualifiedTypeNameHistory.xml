@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.andengine.entity.scene.Scene"/>
-<fullyQualifiedTypeName name="org.xml.sax.XMLReader"/>
-<fullyQualifiedTypeName name="com.singletongames.vtol.Level"/>
-<fullyQualifiedTypeName name="com.singletongames.vtol.LaunchPadObjective"/>
-<fullyQualifiedTypeName name="org.andengine.entity.primitive.Rectangle"/>
-<fullyQualifiedTypeName name="org.andengine.entity.Entity"/>
-<fullyQualifiedTypeName name="com.singletongames.vtol.Objective"/>
-<fullyQualifiedTypeName name="com.singletongames.vtol.Objective.ObjectiveStatus"/>
-<fullyQualifiedTypeName name="org.andengine.util.modifier.ease.EaseElasticOut"/>
-<fullyQualifiedTypeName name="org.andengine.util.modifier.ease.EaseExponentialOut"/>
-<fullyQualifiedTypeName name="org.andengine.util.modifier.ease.EaseStrongIn"/>
-<fullyQualifiedTypeName name="org.andengine.entity.modifier.DelayModifier"/>
-<fullyQualifiedTypeName name="org.andengine.entity.sprite.ButtonSprite"/>
 <fullyQualifiedTypeName name="org.andengine.entity.sprite.ButtonSprite.OnClickListener"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.LevelSelectScene"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.LevelDB"/>
@@ -30,7 +17,6 @@
 <fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.PhysicsSprite"/>
 <fullyQualifiedTypeName name="org.andengine.util.color.Color"/>
-<fullyQualifiedTypeName name="org.andengine.util.debug.Debug"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.IObjectiveManagerListener"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.Util.BodyShape"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.ILanderSelectListener"/>
@@ -38,7 +24,6 @@
 <fullyQualifiedTypeName name="com.singletongames.vtol.objectives.ObjectiveManager"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.objectives.TakeoffObjective"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.ILanderListener"/>
-<fullyQualifiedTypeName name="com.singletongames.vtol.ILanderSceneListener"/>
 <fullyQualifiedTypeName name="android.graphics.drawable.ClipDrawable"/>
 <fullyQualifiedTypeName name="org.andengine.opengl.texture.region.TextureRegion"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.MainActivity"/>
@@ -49,15 +34,30 @@
 <fullyQualifiedTypeName name="org.andengine.engine.handler.timer.ITimerCallback"/>
 <fullyQualifiedTypeName name="org.andengine.extension.debugdraw.primitives.Ellipse"/>
 <fullyQualifiedTypeName name="org.andengine.entity.modifier.ScaleModifier"/>
-<fullyQualifiedTypeName name="org.andengine.entity.modifier.IEntityModifier.IEntityModifierListener"/>
-<fullyQualifiedTypeName name="java.lang.Runnable"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="com.singletongames.vtol.Resources"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.math.Vector2"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.objectives.ObjectiveZone"/>
 <fullyQualifiedTypeName name="com.singletongames.vtol.LanderScene"/>
-<fullyQualifiedTypeName name="org.andengine.entity.modifier.AlphaModifier"/>
 <fullyQualifiedTypeName name="org.andengine.util.modifier.ease.EaseStrongOut"/>
 <fullyQualifiedTypeName name="org.andengine.entity.modifier.ParallelEntityModifier"/>
 <fullyQualifiedTypeName name="android.graphics.Color"/>
+<fullyQualifiedTypeName name="org.andengine.opengl.texture.region.ITextureRegion"/>
+<fullyQualifiedTypeName name="com.singletongames.vtol.IPhysicsSpriteListener"/>
+<fullyQualifiedTypeName name="com.singletongames.vtol.Resources"/>
+<fullyQualifiedTypeName name="com.singletongames.vtol.ICargoDropListener"/>
+<fullyQualifiedTypeName name="com.singletongames.vtol.Cargo"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.physics.box2d.PolygonShape"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.physics.box2d.FixtureDef"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.singletongames.vtol.Util"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.math.Vector2"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.physics.box2d.Fixture"/>
+<fullyQualifiedTypeName name="org.andengine.entity.sprite.Sprite"/>
+<fullyQualifiedTypeName name="org.andengine.entity.scene.Scene"/>
+<fullyQualifiedTypeName name="org.andengine.entity.modifier.AlphaModifier"/>
+<fullyQualifiedTypeName name="org.andengine.entity.modifier.DelayModifier"/>
+<fullyQualifiedTypeName name="org.andengine.entity.modifier.SequenceEntityModifier"/>
+<fullyQualifiedTypeName name="org.andengine.entity.modifier.IEntityModifier.IEntityModifierListener"/>
+<fullyQualifiedTypeName name="java.lang.Runnable"/>
+<fullyQualifiedTypeName name="com.singletongames.vtol.CargoDrop"/>
+<fullyQualifiedTypeName name="com.singletongames.vtol.ILanderSceneListener"/>
+<fullyQualifiedTypeName name="org.andengine.util.debug.Debug"/>
 </qualifiedTypeNameHistroy>

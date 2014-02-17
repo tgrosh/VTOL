@@ -24,7 +24,7 @@ public class LevelDB extends SQLiteOpenHelper {
 	static final String fLevelTime = "LevelTime";
 	private List<Level> mAllLevels = new ArrayList<Level>();
 	
-	static final int mDBVersion = 10;
+	static final int mDBVersion = 11;
 	
 	public LevelDB(Context context) {
 		// THE VALUE OF 1 ON THE NEXT LINE REPRESENTS THE VERSION NUMBER OF THE DATABASE
@@ -49,6 +49,7 @@ public class LevelDB extends SQLiteOpenHelper {
 		addLevel(db, 0,1, "Training 1", false, false, false, 0);
 		addLevel(db, 0,2, "Training 2", true, false, false, 0);
 		addLevel(db, 0,3, "Training 3", true, false, false, 0);
+		addLevel(db, 0,4, "Training 4", true, false, false, 0);
 		addLevel(db, 1,1, "Overworld 1", false, false, false, 0);
 		addLevel(db, 1,1, "Overworld 2", true, false, false, 0);
 		addLevel(db, 1,1, "Overworld 3", true, false, false, 0);

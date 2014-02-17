@@ -20,5 +20,5 @@ public interface ILanderSceneListener {
 	public void onNoFlyEnter();
 	public void onNoFlyExit();
 	public void onCargoPickup();
-	public void onCargoDeliver();
+	public void onCargoDeliver(Cargo cargo, CargoDrop drop);
 }

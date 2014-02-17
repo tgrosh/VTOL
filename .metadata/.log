@@ -2716,3 +2716,13 @@ org.eclipse.core.internal.resources.ResourceException: Resource '/AndEngineDebug
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
 !SUBENTRY 1 org.eclipse.core.resources 4 368 2014-02-12 09:51:22.202
 !MESSAGE Resource '/AndEngineDebugDrawExtension/res' does not exist.
+!SESSION 2014-02-14 09:09:55.327 -----------------------------------------------
+eclipse.buildId=v21.0.1-543035
+java.version=1.6.0_38
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.android.ide.eclipse.adt.package.product -data C:\github\vtol
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-02-16 10:27:32.842
+!MESSAGE Invalid ZIP archive: C:\GitHub\AndEnginePhysicsBox2DExtension\bin\andenginephysicsbox2dextension.jar

@@ -15,13 +15,13 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 public class LunarLander extends Lander {
 
 	public LunarLander(float pX, float pY, ILanderListener listener) {
-		super(pX - Resources.mLander.getWidth()/2, pY - Resources.mLander.getHeight(), LanderDB.getInstance().getLander(1), Resources.mLander, getFixtureDefs(Resources.mLander), getFixtureUserData(), listener);
+		super(pX - Resources.landerLuna.getWidth()/2, pY - Resources.landerLuna.getHeight(), LanderDB.getInstance().getLander(1), Resources.landerLuna, getFixtureDefs(Resources.landerLuna), getFixtureUserData(), listener);
 	}
 
 	@Override
 	protected List<Vector2> getExhaustPoints() {
 		List<Vector2> p = new ArrayList<Vector2>();
-		p.add(new Vector2(0f,(Resources.mLander.getHeight()/2)));
+		p.add(new Vector2(0f,(Resources.landerLuna.getHeight()/2)));
 		
 		return p;
 	}

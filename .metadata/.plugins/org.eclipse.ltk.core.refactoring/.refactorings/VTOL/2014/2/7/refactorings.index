@@ -8,3 +8,8 @@
 1392224722575	Move compilation units
 1392224788034	Delete element
 1392229998660	Delete element
+1392388291603	Rename field 'mLander'
+1392388301485	Rename field 'mLander2'
+1392390926467	Copy compilation unit
+1392495727205	Extract method 'TransformVertices'
+1392496424119	Encapsulate field 'attachable'

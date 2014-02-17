@@ -9,12 +9,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class WoodenBox extends PhysicsSprite {
+public class WoodenBox extends Cargo {
 
-	public WoodenBox(float pX, float pY) {		
-		super(pX, pY, Resources.WoodenBox, getFixtureDefs(Resources.WoodenBox), BodyType.DynamicBody, getFixtureUserData(), null, null);
-		
-		this.mBody.setLinearDamping(.25f);
+	public WoodenBox(float pX, float pY, int id) {		
+		super(pX, pY, id, Resources.WoodenBox, getFixtureDefs(Resources.WoodenBox), getFixtureUserData());
 	}
 
 	private static List<Object> getFixtureUserData() {

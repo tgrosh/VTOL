@@ -91,7 +91,7 @@ public class LanderDB extends SQLiteOpenHelper {
 	public LanderInfo getLander(int LanderID){
 		for (LanderInfo item: allLanders()){
 			if (item.getId() == LanderID){
-				Debug.w("DEBUG: Using Lander: " + item.toString());
+				//Debug.w("DEBUG: Using Lander: " + item.toString());
 				return item;
 			}
 		}

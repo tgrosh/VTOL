@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="70" height="70" tilewidth="60" tileheight="60">
+ <tileset firstgid="1" name="Metal Terrain" tilewidth="60" tileheight="60">
+  <image source="levels/tiles/fwMetalTerrrain.png" width="1200" height="800"/>
+  <terraintypes>
+   <terrain name="Metal" tile="42"/>
+   <terrain name="Backdrop" tile="0"/>
+  </terraintypes>
+  <tile id="0" terrain="1,1,1,1"/>
+  <tile id="21" terrain="1,1,1,0"/>
+  <tile id="22" terrain="1,1,0,0"/>
+  <tile id="23" terrain="1,1,0,1"/>
+  <tile id="25" terrain="0,0,0,1"/>
+  <tile id="27" terrain="0,0,1,0"/>
+  <tile id="41" terrain="1,0,1,0"/>
+  <tile id="42" terrain="0,0,0,0"/>
+  <tile id="43" terrain="0,1,0,1"/>
+  <tile id="61" terrain="1,0,1,1"/>
+  <tile id="62" terrain="0,0,1,1"/>
+  <tile id="63" terrain="0,1,1,1"/>
+  <tile id="65" terrain="0,1,0,0"/>
+  <tile id="67" terrain="1,0,0,0"/>
+ </tileset>
+ <tileset firstgid="261" name="Lander Objects" tilewidth="60" tileheight="60">
+  <tileoffset x="0" y="30"/>
+  <tile id="0">
+   <properties>
+    <property name="type" value="Lander"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="type" value="WoodenBox"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="type" value="LaunchPad"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="type" value="LandingPad"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="type" value="CargoDrop"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Background" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt0zcVgEAABcHrCRYIFggWCP4F8R/FaZjiii1GwHallD4NaUxd8+8pzWlJa3P1lvZ0pLO5+kp3etLbXK38rFn5WbPys2blZ83Kz5qVnzUrP2tWftas/KxZ+Vmz8rNm5WfNys+alZ81Kz9rVn7WrPysWflZs/KzZuVnzcrPmpWfNSs/a1Z+1qz8rFn5WbPys2blZ83Kz5qVnzUrP2tWftas/KxZ+Vmz8rNm5WfNys+alZ81Kz9rVn7WrPysWflZs/KzZuVnzcrPmpWfNSs/a1Z+1qz8rFn5WbPys2blZ83Kz5qVnzUrP2tWftas/KxZ+Vmz8rNm5WfNys+alZ81Kz9rVn7WrPysWflZ8wcVhiIs
+  </data>
+ </layer>
+ <layer name="Tile Layer 1" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt180NgjAAgNG6hBrjBOAMaoz7zyTctAk/bYO0yTu8G4HypbSlDyH0AAAAAAAA7OIyeGS4VjD2Ld0GhwxdBWPXpZ4ux8Hpy7nCLrlrwBrPiS5d9Oz4uvvCff+x/uTO9RJd4bP/MZ9a6zJ+g29ddpkruujSUpdX+N2v5/bumrvE544lJe82Na4au6SOqeTddNGlpS5za18s9TzVcpc95uLS/8+af6uWbXEG0EUXXXQZpex1W+2JAAAAAAAAQLoP/fHsmg==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1" width="70" height="70">
+  <object gid="281" x="894" y="2307"/>
+  <object gid="282" x="2696" y="2007">
+   <properties>
+    <property name="id" value="0"/>
+   </properties>
+  </object>
+  <object gid="94" x="1187" y="1655"/>
+  <object gid="283" x="2643" y="2670">
+   <properties>
+    <property name="id" value="0"/>
+   </properties>
+  </object>
+  <object gid="263" x="1767" y="2066">
+   <properties>
+    <property name="id" value="0"/>
+   </properties>
+  </object>
+  <object gid="261" x="889" y="2292"/>
+ </objectgroup>
+ <objectgroup color="#00aaff" name="Physics" width="70" height="70">
+  <object x="1288" y="2068" width="719" height="296"/>
+  <object x="631" y="2310" width="657" height="53"/>
+  <object x="621" y="1597" width="1388" height="51"/>
+  <object x="573" y="1645" width="55" height="722"/>
+  <object x="1945" y="2252" width="62" height="474"/>
+  <object x="2367" y="1648" width="120" height="720"/>
+  <object x="2490" y="2009" width="419" height="359"/>
+  <object x="2008" y="2668" width="1319" height="61"/>
+  <object x="3270" y="1767" width="57" height="901"/>
+  <object x="3329" y="1649" width="63" height="116"/>
+  <object x="1952" y="1353" width="56" height="240"/>
+  <object x="2011" y="1352" width="839" height="55"/>
+  <object x="2849" y="1349" width="61" height="299"/>
+  <object x="2369" y="1588" width="237" height="60"/>
+  <object x="2912" y="1591" width="477" height="57"/>
+ </objectgroup>
+ <objectgroup color="#aaff00" name="Objectives" width="70" height="70" visible="0">
+  <object x="1699" y="1942" width="192" height="167">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="type" value="ObjectiveZone"/>
+   </properties>
+  </object>
+  <object x="2571" y="2549" width="192" height="167">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="type" value="ObjectiveZone"/>
+   </properties>
+  </object>
+  <object x="2626" y="1902" width="192" height="167">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="type" value="ObjectiveZone"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Preview" width="70" height="70">
+  <object x="2739" y="1962">
+   <polyline points="0,0 -70,682 -941,72 -1817,266"/>
+  </object>
+ </objectgroup>
+</map>

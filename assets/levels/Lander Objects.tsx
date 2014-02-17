@@ -22,4 +22,9 @@
    <property name="type" value="LandingPad"/>
   </properties>
  </tile>
+ <tile id="22">
+  <properties>
+   <property name="type" value="CargoDrop"/>
+  </properties>
+ </tile>
 </tileset>

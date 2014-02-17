@@ -2,6 +2,8 @@ package com.singletongames.vtol.objectives;
 
 import org.andengine.util.debug.Debug;
 
+import com.singletongames.vtol.Cargo;
+import com.singletongames.vtol.CargoDrop;
 import com.singletongames.vtol.ILanderSceneListener;
 import com.singletongames.vtol.LanderScene;
 import com.singletongames.vtol.LandingPad;
@@ -134,7 +136,7 @@ public class ZoneObjective extends Objective {
 			}
 
 			@Override
-			public void onCargoDeliver() {
+			public void onCargoDeliver(Cargo cargo, CargoDrop drop) {
 				// TODO Auto-generated method stub
 				
 			}

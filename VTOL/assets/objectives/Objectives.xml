@@ -19,7 +19,17 @@
 				<objective id="1" type="WaypointObjective" description="wp1" objectiveZoneID="0" hidden="true" prerequisiteId="0" />
 				<objective id="2" type="WaypointObjective" description="wp2" objectiveZoneID="1" hidden="true" prerequisiteId="1" />
 				<objective id="3" type="WaypointObjective" description="wp3" objectiveZoneID="2" hidden="true" prerequisiteId="2" />
- 				<objective id="4" type="LandingPadObjective" description="Land Safely on the Landing Pad" prerequisiteId="3" landingPadId="0" />  				
+ 				<objective id="4" type="LandingPadObjective" description="Land Safely on the Landing Pad" prerequisiteId="0" landingPadId="0" />  				
+			</objectives>
+		</level>
+		<level id="4">
+			<objectives>
+				<objective id="0" type="TakeoffObjective" description="Take Off" />
+				<objective id="1" type="WaypointObjective" description="wp1" objectiveZoneID="0" hidden="true" prerequisiteId="0" />
+				<objective id="2" type="WaypointObjective" description="wp2" objectiveZoneID="1" hidden="true" prerequisiteId="1" />
+				<objective id="3" type="WaypointObjective" description="wp3" objectiveZoneID="2" hidden="true" prerequisiteId="2" />
+				<objective id="4" type="DeliverCargoObjective" description="Deliver Cargo to Cargo Drop" cargoId="0" cargoDropId="0" prerequisiteId="0" />
+ 				<objective id="5" type="LandingPadObjective" description="Land Safely on the Landing Pad" prerequisiteId="4" landingPadId="0" />  				
 			</objectives>
 		</level>
 	</chapter>

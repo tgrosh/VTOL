@@ -99,6 +99,14 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 		createExhaustEmitters(); //attach first so the smoke is behind the lander
 		createTakeoffEmitters();
 		
+		if (Resources.RocketEngine0.isPlaying()) {
+			Resources.RocketEngine0.pause();
+		}
+		else if (Resources.RocketEngine0.isStopped()) {
+			Resources.RocketEngine0.play();
+			Resources.RocketEngine0.pause();
+		}
+		
 		GameContactListener.getInstance().registerContactListener(new ContactListener() {			
 			@Override
 			public void preSolve(Contact contact, Manifold oldManifold) {
@@ -110,8 +118,8 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 								
 				if (enginesOn && impulse.getNormalImpulses()[0] > damageThreshold && (contact.getFixtureA().getBody().equals(mBody) || contact.getFixtureB().getBody().equals(mBody))){
 					healthRemaining -= impulse.getNormalImpulses()[0];
-					Debug.w("DEBUG: Damage Taken: " + impulse.getNormalImpulses()[0]);
-					Debug.w("DEBUG: Health Remaining: " + healthRemaining);
+					//Debug.w("DEBUG: Damage Taken: " + impulse.getNormalImpulses()[0]);
+					//Debug.w("DEBUG: Health Remaining: " + healthRemaining);
 					showDamageTaken();
 					
 					if (healthRemaining <= 0){
@@ -142,9 +150,10 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 			}
 			public void beginContact(Contact contact) {				
 				if (contact.getFixtureA().getBody().equals(mBody) && contact.getFixtureA().isSensor()){
-					if (!cargoConnected && contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("CargoAttachment")){
+					if (!cargoConnected && contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("CargoAttachment")){						
 						cargoBody = contact.getFixtureB().getBody();
-						attachCargo();
+						Cargo cargo = (Cargo) cargoBody.getUserData();
+						if (cargo.isAttachable()) attachCargo();
 					}
 					if (!contact.getFixtureB().isSensor() && !baseContacts.contains(contact.getFixtureB().getBody())){
 						baseContacts.add(contact.getFixtureB().getBody());
@@ -153,7 +162,8 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 				else if (contact.getFixtureB().getBody().equals(mBody) && contact.getFixtureB().isSensor()){
 					if (!cargoConnected && contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("CargoAttachment")){
 						cargoBody = contact.getFixtureA().getBody();
-						attachCargo();
+						Cargo cargo = (Cargo) cargoBody.getUserData();
+						if (cargo.isAttachable()) attachCargo();
 					}
 					if (!contact.getFixtureA().isSensor() && !baseContacts.contains(contact.getFixtureA().getBody())){
 						baseContacts.add(contact.getFixtureA().getBody());
@@ -173,12 +183,10 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 				noFlyZoneCount++;
 			}
 		});
-		
-		Resources.RocketEngine0.stop();
-		Resources.RocketEngine0.play();
-		Resources.RocketEngine0.pause();
-		
+				
 		Resources.mEngine.registerUpdateHandler(new IUpdateHandler() {
+			float counter = 0.0f;
+			
 			@Override
 			public void reset() {
 			}
@@ -186,29 +194,24 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 			@Override
 			public void onUpdate(float pSecondsElapsed) {
 				if (paused) {
-					Resources.RocketEngine0.pause();
+					if (Resources.RocketEngine0.isPlaying()) Resources.RocketEngine0.pause();
 					return;
 				}
 				
 				if (destroyed || !enginesOn) {
 					stopExhaust();
 					stopTakeoffEmitters();
-					Resources.RocketEngine0.pause();
+					if (Resources.RocketEngine0.isPlaying()) Resources.RocketEngine0.pause();
 					return;
 				}
 				
 				if (healthRemaining < info.toughness){
 					showDamageCritical();
 				}
-				
-				Resources.RocketEngine0.setVolume(currentThrottle);
-				Resources.RocketEngine0.setRate(.5f + currentThrottle);
-				
+								
 				float mainEngineThrust = 0f;
 				float bodyAngle = mBody.getAngle();
 				airborn = (baseContacts.size() == 0);
-				
-				
 				
 				if (currentFuel > 0f){								
 					mainEngineThrust = info.maxEngineThrust * currentThrottle;
@@ -237,7 +240,12 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 				
 				float eX, eY;
 				if (mainEngineThrust > 0){
-					Resources.RocketEngine0.resume();
+					if (Resources.RocketEngine0.isLoaded())	{
+						Resources.RocketEngine0.setVolume(currentThrottle);
+						Resources.RocketEngine0.setRate(.5f + currentThrottle);
+						if (Resources.RocketEngine0.isPaused()) Resources.RocketEngine0.resume();
+					}
+					
 					
 					if (airborn){	
 						if (!takeOffComplete) {
@@ -263,7 +271,8 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 							mBody.setLinearVelocity(linearVelocty);							
 							if (!cargoConnected && tempCargo != null) {
 								cargoBody = tempCargo;
-								attachCargo();
+								Cargo cargo = (Cargo) cargoBody.getUserData();
+								if (cargo.isAttachable()) attachCargo();
 							}
 						}
 						else if (mBody.getLinearVelocity().x > 2f && direction < 0){
@@ -284,7 +293,8 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 							mBody.setLinearVelocity(linearVelocty);							
 							if (!cargoConnected && tempCargo != null) {
 								cargoBody = tempCargo;
-								attachCargo();
+								Cargo cargo = (Cargo) cargoBody.getUserData();
+								if (cargo.isAttachable()) attachCargo();
 							}
 						}
 						
@@ -318,7 +328,7 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 					if (cameraFocused) camera.setZoomFactor(maxZoomOut);					
 				}
 				else{
-					Resources.RocketEngine0.pause();
+					if (Resources.RocketEngine0.isPlaying()) Resources.RocketEngine0.pause();
 					
 					stopExhaust();
 					stopTakeoffEmitters();
@@ -382,7 +392,6 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 			@Override
 			public void run() {
 				if (!cargoConnected){
-					Debug.w("DEBUG: Attaching Cargo");
 					createRope(mBody.getWorldCenter().x * PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT, 
 									mBody.getWorldCenter().y * PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT, 
 									cargoBody.getWorldCenter().x * PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT, 
@@ -405,21 +414,21 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 	
 	protected void detachCargo(){
 		if (cargoConnected){
-			Debug.w("DEBUG: Detaching Cargo");
+			//Debug.w("DEBUG: Detaching Cargo");
 			cargoConnected = false;
 			Resources.mPhysicsWorld.destroyJoint(ropeJoint);
 			ropeJoint = null;
 			cargoBody = null;
-			Debug.w("DEBUG: Joint Destroyed");
+			//Debug.w("DEBUG: Joint Destroyed");
 			Resources.mEngine.runOnUpdateThread(new Runnable() {						
 				@Override
 				public void run() {	
 					if (!cargoConnected){
 						for (Line ropeLine: ropeLines){
 							ropeLine.detachSelf();
-							Debug.w("DEBUG: Rope Line Detached");
+							//Debug.w("DEBUG: Rope Line Detached");
 						}
-						Debug.w("DEBUG: Cargo Detached");
+						//Debug.w("DEBUG: Cargo Detached");
 					}
 				}
 			});		
@@ -669,11 +678,11 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 	private void createRope(float x1, float y1, float x2, float y2) {
 		for (Line ropeLine: ropeLines){
 			ropeLine.detachSelf();
-			Debug.w("DEBUG: Rope Line Detached");
+			//Debug.w("DEBUG: Rope Line Detached");
 		}
 		ropeLines.clear();
 		
-		Debug.w("DEBUG: Creating Rope");
+		//Debug.w("DEBUG: Creating Rope");
 		for (int x=-1;x<2;x++){
 			Line ropeLine = new Line(
 					(x1)+x, 
@@ -695,7 +704,7 @@ public abstract class Lander extends PhysicsAnimatedSprite {
 			
 			ropeLines.add(ropeLine);
 		}
-		Debug.w("DEBUG: Rope Created");
+		//Debug.w("DEBUG: Rope Created");
 	}	
 
 	public void registerListener(ILanderListener listener){

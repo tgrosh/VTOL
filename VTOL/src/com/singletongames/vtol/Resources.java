@@ -51,16 +51,16 @@ public class Resources {
 	public static int selectedLander = 0;
 	
 	public static TiledTextureRegion ResumeButton, StartButton, MenuButton, RestartButton, PauseButton, OKButton, BackButton,NextButton;
-	public static TiledTextureRegion mLander, mLander2;
+	public static TiledTextureRegion landerLuna, landerHauler;
 	public static TextureRegion[] landerDebris = new TextureRegion[6];	
 	public static List<TiledTextureRegion> chapterIcons = new ArrayList<TiledTextureRegion>();
 	public static List<TextureRegion> titleBars = new ArrayList<TextureRegion>();
 	public static List<TextureRegion> HighResLanders = new ArrayList<TextureRegion>();
 	public static TextureRegion mThrottleBackground, mThrottleButton, mFuelGaugeBackground, mFuelGaugeOverlay, MainMenuBackground, MessageFrame;
 	public static TextureRegion LaunchPad, LandingPad, vtol_logo, titleBar, LanderSelectLocked, TipFrame, TipArrow;
-	public static TiledTextureRegion ExplosionSequence, fireworks;
+	public static TiledTextureRegion ExplosionSequence, fireworks, CargoDrop;
 	public static TextureRegion ObjectiveBullet, ObjectiveCheck, WoodenBox, ChainLink;
-	public static TextureRegion GaugeBackground, GaugeGreen, GaugeRed, PingButton;
+	public static TextureRegion GaugeBackground, GaugeGreen, GaugeRed, PingButton, CargoDropGlow;
 	
 	public static TextureRegion smokeParticle;
 	
@@ -151,6 +151,7 @@ public class Resources {
 			GaugeGreen = Util.GetTextureRegion("gfx/GaugeGreen.png");
 			GaugeRed = Util.GetTextureRegion("gfx/GaugeRed.png");
 			PingButton = Util.GetTextureRegion("gfx/PingButton.png");
+			CargoDropGlow = Util.GetTextureRegion("gfx/CargoDropGlow.png");
 			
 			landerDebris[0] = Util.GetTextureRegion("gfx/LanderDebris1.png");
 			landerDebris[1] = Util.GetTextureRegion("gfx/LanderDebris2.png");
@@ -166,8 +167,9 @@ public class Resources {
 			chapterIcons.add(Util.GetTiledTextureRegion("gfx/ChapterIcons0.png", 3, 1));
 			chapterIcons.add(Util.GetTiledTextureRegion("gfx/ChapterIcons1.png", 3, 1));
 			
-			mLander = Util.GetTiledTextureRegion("gfx/Lander.png", 2, 1);
-			mLander2 = Util.GetTiledTextureRegion("gfx/Lander2.png", 2, 1);
+			landerLuna = Util.GetTiledTextureRegion("gfx/Lander.png", 2, 1);
+			landerHauler = Util.GetTiledTextureRegion("gfx/Lander2.png", 2, 1);
+			CargoDrop = Util.GetTiledTextureRegion("gfx/CargoDrop.png", 5, 1);
 			
 			mThrottleBackground = Util.GetTextureRegion("gfx/ThrottleBackground.png");
 			mThrottleButton = Util.GetTextureRegion("gfx/ThrottleButton.png");

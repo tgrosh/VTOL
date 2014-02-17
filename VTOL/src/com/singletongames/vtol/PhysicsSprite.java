@@ -109,20 +109,27 @@ public class PhysicsSprite extends Sprite {
 	}
 
 	private void ApplyPhysics() {		
+		destroyPhysics();
+		if (mVertices != null){
+			mVertices = Util.TransformVertices(this, mVertices);
+		}	
+		else if (mFixtureDefs != null){			
+			mFixtureDefs = Util.TransformVertices(this, mFixtureDefs);
+		}	
+		mBody = Util.CreateBody(this, mFixtureDef, mBodyType, mBodyShape, mVertices, mFixtureDefs, mFixtureUserData, mBodyUserData);
+		if (mBodyUserData == null) mBody.setUserData(this);
+		this.setUserData(mBody);
+		mPhysicsConnector = new PhysicsConnector(this, mBody);
+		Resources.mPhysicsWorld.registerPhysicsConnector(mPhysicsConnector);	
+	}
+	
+	private void destroyPhysics(){
 		if (mPhysicsConnector != null){
 			Resources.mPhysicsWorld.unregisterPhysicsConnector(mPhysicsConnector);			
 		}
 		if (mBody != null){
 			Resources.mPhysicsWorld.destroyBody(mBody);
 		}
-		if (mVertices != null){
-			mVertices = Util.TransformVertices(this, mVertices);
-		}		
-		mBody = Util.CreateBody(this, mFixtureDef, mBodyType, mBodyShape, mVertices, mFixtureDefs, mFixtureUserData, mBodyUserData);
-		if (mBodyUserData == null) mBody.setUserData(this);
-		this.setUserData(mBody);
-		mPhysicsConnector = new PhysicsConnector(this, mBody);
-		Resources.mPhysicsWorld.registerPhysicsConnector(mPhysicsConnector);	
 	}
 
 	@Override
@@ -155,10 +162,9 @@ public class PhysicsSprite extends Sprite {
 	}
 
 	public void destroy(){		
+		destroyPhysics();
 		if (this.hasParent()){
-			Debug.w("detaching self");
 			this.detachSelf();
-			Debug.w("detached self");
 		}
 		
 		this.clearUpdateHandlers();

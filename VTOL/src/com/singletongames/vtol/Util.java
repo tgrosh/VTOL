@@ -201,7 +201,7 @@ public class Util {
 			b = Resources.mPhysicsWorld.createBody(bd);
 			b.setUserData(bodyUserData);
 			for (int x=0; x< fixtureDefs.size(); x++){
-				FixtureDef def = fixtureDefs.get(x);
+				FixtureDef def = fixtureDefs.get(x);				
 				Fixture fix = b.createFixture(def);
 				if (fixtureUserData != null && fixtureUserData.size() > x){
 					fix.setUserData(fixtureUserData.get(x));
@@ -233,7 +233,23 @@ public class Util {
 		
 		return pVertices;
 	}
-	
+	public static List<FixtureDef> TransformVertices(Sprite sprite, List<FixtureDef> fixtureDefs) {
+		if (fixtureDefs == null) return null;
+		
+		for (FixtureDef def: fixtureDefs){
+			PolygonShape poly = (PolygonShape) def.shape;				
+			Vector2[] verts = new Vector2[poly.getVertexCount()];
+			for (int vertIndex=0;vertIndex<poly.getVertexCount(); vertIndex++){					
+				Vector2 vertex = new Vector2();
+				poly.getVertex(vertIndex, vertex);
+				verts[vertIndex]=vertex;
+			}
+			verts = Util.TransformVertices(sprite, verts);
+			def = Util.createPolygonFixtureDef(verts, def);
+		}
+		
+		return fixtureDefs;
+	}
 	
 	
 	public static FixtureDef getSensorFixtureDef(FixtureDef pFixtureDef){
@@ -511,8 +527,7 @@ public class Util {
 		PolygonShape basePoly;
 		basePoly = new PolygonShape();
 		basePoly.set(vertices);
-		def.shape = basePoly;
-		
+		def.shape = basePoly;		
 		return def;
 	}
 	

@@ -28,7 +28,7 @@
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.PropertiesFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -37,19 +37,30 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
 </folder>
 </info>
 </editorArea>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LanderScene.java" partName="LanderScene.java" path="C:/GitHub/VTOL/VTOL/src/com/singletongames/vtol/LanderScene.java" title="LanderScene.java" tooltip="VTOL/src/com/singletongames/vtol/LanderScene.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/VTOL/src/com/singletongames/vtol/LanderScene.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="8287" selectionTopPixel="1365"/>
+</editor>
 </editors>
 <views>
 <view id="org.eclipse.jdt.ui.TypeHierarchy" partName="Type Hierarchy">
-<viewState hidefields="false" hidelocaltypes="false" hidenonpublic="false" hidestatic="false" input="=VTOL/src&lt;com.singletongames.vtol{ILanderSceneListener.java[ILanderSceneListener" link_editors="0" mv_vertical_scroll="0" orientation="3" qualified_names="0" ratio="350" selection="=VTOL/src&lt;com.singletongames.vtol{ILanderSceneListener.java[ILanderSceneListener" showinherited="false" sortbydefiningtype="false" vertical_scroll="0" view="2" workingSetName=""/>
+<viewState hidefields="false" hidelocaltypes="false" hidenonpublic="false" hidestatic="false" input="=VTOL/src&lt;com.singletongames.vtol{ICargoDropListener.java[ICargoDropListener" link_editors="0" mv_vertical_scroll="0" orientation="3" qualified_names="0" ratio="350" selection="=VTOL/src&lt;com.singletongames.vtol{ICargoDropListener.java[ICargoDropListener" showinherited="false" sortbydefiningtype="false" vertical_scroll="0" view="2" workingSetName=""/>
 </view>
 <view id="org.eclipse.ui.views.ProgressView" partName="Progress">
 <viewState/>
 </view>
-<view id="org.eclipse.search.ui.views.SearchView" partName="Search"/>
+<view id="org.eclipse.search.ui.views.SearchView" partName="Search">
+<viewState isPinned="false">
+<view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
+<view IMemento.internal.id="org.eclipse.search.text.FileSearchResultPage" org.eclipse.search.lastActivation="1" org.eclipse.search.resultpage.layout="2" org.eclipse.search.resultpage.limit="1000" org.eclipse.search.resultpage.sorting="2"/>
+</viewState>
+</view>
 <view id="com.android.ide.eclipse.ddms.views.DeviceView" partName="Devices"/>
 <view id="org.eclipse.debug.ui.DebugView" partName="Debug">
 <viewState/>
@@ -94,8 +105,7 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Errors"/>
-<category IMemento.internal.id="Warnings (100 of 169 items)"/>
+<category IMemento.internal.id="Warnings (100 of 166 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="292" org.eclipse.ui.ide.severityAndDescriptionField="672"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -142,7 +152,7 @@
 <view id="com.android.ide.eclipse.ddms.views.AllocTrackerView" partName="Allocation Tracker"/>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="0" fixed="0" version="0.016">
 <descriptor class="com.android.ide.eclipse.ddms.Perspective" id="com.android.ide.eclipse.ddms.Perspective" label="DDMS"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -398,32 +408,23 @@
 <view id="org.eclipse.debug.ui.VariableView"/>
 <view id="org.eclipse.debug.ui.ExpressionView"/>
 <fastViewBars/>
-<layout>
-<mainWindow>
-<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder activePageID="org.eclipse.debug.ui.ExpressionView" appearance="2" expanded="2">
-<page content="org.eclipse.jdt.ui.TypeHierarchy" label="Type Hierarchy"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.debug.ui.ExpressionView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.jdt.ui.TypeHierarchy" label="Type Hierarchy"/>
 <page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="Expressions"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.749736" ratioLeft="710" ratioRight="237" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.749736" ratioLeft="710" ratioRight="237" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.cdt.debug.ui.executablesView" label="Executables"/>
@@ -436,8 +437,7 @@
 <page content="org.eclipse.search.SearchResultView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.MemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.MemoryView:org.eclipse.debug.ui.MemoryView.0" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
@@ -448,24 +448,19 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.4492958" ratioLeft="319" ratioRight="391" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView"/>
-<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="Breakpoints"/>
 <page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.dsf.gdb.ui.tracecontrol.view" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.5" ratioLeft="956" ratioRight="956" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.5" ratioLeft="956" ratioRight="956" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.debug.ui.SignalsView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.ModuleView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
@@ -476,7 +471,175 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/LanderScene.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/objectives/DeliverCargoObjective.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/VTOL/assets/objectives/Objectives.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/Level.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/Cargo.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/WoodenBox.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/VTOL/assets/levels/Level0-4.tmx"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/objectives/ObjectiveParser.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/CargoDrop.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/Lander.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/LanderDB.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/Util.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/VTOL/assets/objectives/Objectives.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/objectives/ObjectiveParser.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/VTOL/src/com/singletongames/vtol/LanderScene.java"/>
+</editors>
+<item historyLabel="Level0-4.tmx" index="6">
+<position info="not_deleted" x="1026" y="0"/>
+</item>
+<item historyLabel="Objectives.xml" index="2">
+<position info="not_deleted" x="1749" y="21"/>
+</item>
+<item historyLabel="ObjectiveParser.java" index="7">
+<position info="not_deleted" x="3585" y="0"/>
+</item>
+<item historyLabel="Objectives.xml" index="2">
+<position info="not_deleted" x="1749" y="21"/>
+</item>
+<item historyLabel="ObjectiveParser.java" index="7">
+<position info="not_deleted" x="3111" y="0"/>
+</item>
+<item historyLabel="Objectives.xml" index="2">
+<position info="not_deleted" x="1814" y="7"/>
+</item>
+<item historyLabel="ObjectiveParser.java" index="7">
+<position info="not_deleted" x="3051" y="0"/>
+</item>
+<item historyLabel="Objectives.xml" index="2">
+<position info="not_deleted" x="1826" y="11"/>
+</item>
+<item historyLabel="ObjectiveParser.java" index="7">
+<position info="not_deleted" x="2954" y="0"/>
+</item>
+<item historyLabel="CargoDrop.java" index="8">
+<position/>
+</item>
+<item historyLabel="LanderScene.java" index="0">
+<position/>
+</item>
+<item historyLabel="DeliverCargoObjective.java" index="1">
+<position info="not_deleted" x="287" y="21"/>
+</item>
+<item historyLabel="LanderScene.java" index="0">
+<position/>
+</item>
+<item historyLabel="CargoDrop.java" index="8">
+<position/>
+</item>
+<item historyLabel="ObjectiveParser.java" index="7">
+<position info="not_deleted" x="3051" y="0"/>
+</item>
+<item historyLabel="Objectives.xml" index="2">
+<position info="not_deleted" x="1720" y="0"/>
+</item>
+<item historyLabel="ObjectiveParser.java" index="7">
+<position info="not_deleted" x="3097" y="0"/>
+</item>
+<item historyLabel="DeliverCargoObjective.java" index="1">
+<position info="not_deleted" x="764" y="21"/>
+</item>
+<item historyLabel="Level.java" index="3">
+<position info="not_deleted" x="9086" y="0"/>
+</item>
+<item historyLabel="WoodenBox.java" index="5">
+<position info="not_deleted" x="459" y="0"/>
+</item>
+<item historyLabel="Cargo.java" index="4">
+<position info="not_deleted" x="614" y="5"/>
+</item>
+<item historyLabel="WoodenBox.java" index="5">
+<position info="not_deleted" x="459" y="0"/>
+</item>
+<item historyLabel="Level.java" index="3">
+<position info="not_deleted" x="8701" y="0"/>
+</item>
+<item historyLabel="CargoDrop.java" index="8">
+<position/>
+</item>
+<item historyLabel="Level.java" index="3">
+<position info="not_deleted" x="8701" y="0"/>
+</item>
+<item historyLabel="DeliverCargoObjective.java" index="1">
+<position info="not_deleted" x="2877" y="0"/>
+</item>
+<item historyLabel="CargoDrop.java" index="8">
+<position info="not_deleted" x="1908" y="0"/>
+</item>
+<item historyLabel="LanderScene.java" index="0">
+<position info="not_deleted" x="21403" y="18"/>
+</item>
+<item historyLabel="LanderScene.java" index="0">
+<position info="not_deleted" x="21554" y="0"/>
+</item>
+<item historyLabel="DeliverCargoObjective.java" index="1">
+<position info="not_deleted" x="2877" y="0"/>
+</item>
+<item historyLabel="LanderScene.java" index="0">
+<position info="not_deleted" x="21554" y="0"/>
+</item>
+<item historyLabel="DeliverCargoObjective.java" index="1">
+<position info="not_deleted" x="2877" y="0"/>
+</item>
+<item historyLabel="DeliverCargoObjective.java" index="1">
+<position info="not_deleted" x="1112" y="0"/>
+</item>
+<item historyLabel="LanderScene.java" index="0">
+<position info="not_deleted" x="21554" y="0"/>
+</item>
+<item historyLabel="CargoDrop.java" index="8">
+<position info="not_deleted" x="1908" y="0"/>
+</item>
+<item historyLabel="Lander.java" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Lander.java" index="9">
+<position info="not_deleted" x="5214" y="7"/>
+</item>
+<item historyLabel="Lander.java" index="9">
+<position info="not_deleted" x="5643" y="0"/>
+</item>
+<item historyLabel="Lander.java" index="9">
+<position info="not_deleted" x="17150" y="7"/>
+</item>
+<item historyLabel="Lander.java" index="9">
+<position info="not_deleted" x="17619" y="0"/>
+</item>
+<item historyLabel="Lander.java" index="9">
+<position info="not_deleted" x="27711" y="0"/>
+</item>
+<item historyLabel="LanderDB.java" index="10">
+<position info="not_deleted" x="3420" y="7"/>
+</item>
+<item historyLabel="Util.java" index="11">
+<position info="not_deleted" x="13284" y="0"/>
+</item>
+<item historyLabel="LanderDB.java" index="10">
+<position info="not_deleted" x="3420" y="7"/>
+</item>
+<item historyLabel="Lander.java" index="9">
+<position info="not_deleted" x="27711" y="0"/>
+</item>
+<item historyLabel="CargoDrop.java" index="8">
+<position info="not_deleted" x="1908" y="0"/>
+</item>
+<item historyLabel="DeliverCargoObjective.java" index="1">
+<position info="not_deleted" x="1112" y="0"/>
+</item>
+<item historyLabel="Objectives.xml" index="12">
+<position info="not_deleted" x="1720" y="0"/>
+</item>
+<item historyLabel="ObjectiveParser.java" index="13">
+<position info="not_deleted" x="3097" y="0"/>
+</item>
+<item active="true" historyLabel="LanderScene.java" index="14">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+</navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
@@ -497,47 +660,47 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LanderScene.java" tooltip="VTOL/src/com/singletongames/vtol/LanderScene.java">
 <persistable path="/VTOL/src/com/singletongames/vtol/LanderScene.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ChapterSelectScene.java" tooltip="VTOL/src/com/singletongames/vtol/ChapterSelectScene.java">
-<persistable path="/VTOL/src/com/singletongames/vtol/ChapterSelectScene.java"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Util.java" tooltip="VTOL/src/com/singletongames/vtol/Util.java">
 <persistable path="/VTOL/src/com/singletongames/vtol/Util.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LevelSelectScene.java" tooltip="VTOL/src/com/singletongames/vtol/LevelSelectScene.java">
-<persistable path="/VTOL/src/com/singletongames/vtol/LevelSelectScene.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainMenuScene.java" tooltip="VTOL/src/com/singletongames/vtol/MainMenuScene.java">
-<persistable path="/VTOL/src/com/singletongames/vtol/MainMenuScene.java"/>
-</file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="ButtonSprite.class" tooltip="org.andengine.entity.sprite.ButtonSprite">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=AndEngineDebugDrawExtension/C:\/GitHub\/AndEngine\/bin\/andengine.jar&lt;org.andengine.entity.sprite(ButtonSprite.class"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LandingPadObjective.java" tooltip="VTOL/src/com/singletongames/vtol/objectives/LandingPadObjective.java">
-<persistable path="/VTOL/src/com/singletongames/vtol/objectives/LandingPadObjective.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LevelDB.java" tooltip="VTOL/src/com/singletongames/vtol/LevelDB.java">
-<persistable path="/VTOL/src/com/singletongames/vtol/LevelDB.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Resources.java" tooltip="VTOL/src/com/singletongames/vtol/Resources.java">
-<persistable path="/VTOL/src/com/singletongames/vtol/Resources.java"/>
-</file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="ScaleModifier.class" tooltip="org.andengine.entity.modifier.ScaleModifier">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=VTOL/C:\/GitHub\/AndEngine\/bin\/andengine.jar&lt;org.andengine.entity.modifier(ScaleModifier.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LanderDB.java" tooltip="VTOL/src/com/singletongames/vtol/LanderDB.java">
+<persistable path="/VTOL/src/com/singletongames/vtol/LanderDB.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Lander.java" tooltip="VTOL/src/com/singletongames/vtol/Lander.java">
 <persistable path="/VTOL/src/com/singletongames/vtol/Lander.java"/>
 </file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CargoDrop.java" tooltip="VTOL/src/com/singletongames/vtol/CargoDrop.java">
+<persistable path="/VTOL/src/com/singletongames/vtol/CargoDrop.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Cargo.java" tooltip="VTOL/src/com/singletongames/vtol/Cargo.java">
+<persistable path="/VTOL/src/com/singletongames/vtol/Cargo.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WoodenBox.java" tooltip="VTOL/src/com/singletongames/vtol/WoodenBox.java">
+<persistable path="/VTOL/src/com/singletongames/vtol/WoodenBox.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Level.java" tooltip="VTOL/src/com/singletongames/vtol/Level.java">
 <persistable path="/VTOL/src/com/singletongames/vtol/Level.java"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Entity.class" tooltip="org.andengine.entity.Entity">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=VTOL/C:\/GitHub\/AndEngine\/bin\/andengine.jar&lt;org.andengine.entity(Entity.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DeliverCargoObjective.java" tooltip="VTOL/src/com/singletongames/vtol/objectives/DeliverCargoObjective.java">
+<persistable path="/VTOL/src/com/singletongames/vtol/objectives/DeliverCargoObjective.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ScenePreview.java" tooltip="VTOL/src/com/singletongames/vtol/ScenePreview.java">
-<persistable path="/VTOL/src/com/singletongames/vtol/ScenePreview.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ObjectiveParser.java" tooltip="VTOL/src/com/singletongames/vtol/objectives/ObjectiveParser.java">
+<persistable path="/VTOL/src/com/singletongames/vtol/objectives/ObjectiveParser.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="Objectives.xml" tooltip="VTOL/assets/objectives/Objectives.xml">
+<persistable path="/VTOL/assets/objectives/Objectives.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="Level0-4.tmx" tooltip="VTOL/assets/levels/Level0-4.tmx">
+<persistable path="/VTOL/assets/levels/Level0-4.tmx"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="Level0-3.tmx" tooltip="VTOL/assets/levels/Level0-3.tmx">
 <persistable path="/VTOL/assets/levels/Level0-3.tmx"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ZoneObjective.java" tooltip="VTOL/src/com/singletongames/vtol/objectives/ZoneObjective.java">
+<persistable path="/VTOL/src/com/singletongames/vtol/objectives/ZoneObjective.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TakeoffObjective.java" tooltip="VTOL/src/com/singletongames/vtol/objectives/TakeoffObjective.java">
+<persistable path="/VTOL/src/com/singletongames/vtol/objectives/TakeoffObjective.java"/>
 </file>
 </mruList>
 </workbench>

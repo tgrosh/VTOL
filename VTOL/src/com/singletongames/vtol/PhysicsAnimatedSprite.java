@@ -6,12 +6,15 @@ import java.util.List;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.extension.physics.box2d.PhysicsConnector;
 import org.andengine.opengl.texture.region.ITiledTextureRegion;
+import org.andengine.util.debug.Debug;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.singletongames.vtol.Util.BodyShape;
@@ -29,11 +32,11 @@ public class PhysicsAnimatedSprite extends AnimatedSprite {
 	Object mBodyUserData = null;
 	List<IPhysicsSpriteListener> listeners = new ArrayList<IPhysicsSpriteListener>();
 	
-	public PhysicsAnimatedSprite(float pX, float pY,ITiledTextureRegion pTiledTextureRegion, FixtureDef pFixtureDef, Object userData, IPhysicsSpriteListener listener) {
+	public PhysicsAnimatedSprite(float pX, float pY, ITiledTextureRegion pTiledTextureRegion, FixtureDef pFixtureDef, Object userData, IPhysicsSpriteListener listener) {
 		this(pX, pY, pTiledTextureRegion, pFixtureDef, userData, BodyType.StaticBody, Util.BodyShape.Box, listener);
 	}
 	
-	public PhysicsAnimatedSprite(float pX, float pY,ITiledTextureRegion pTiledTextureRegion, FixtureDef pFixtureDef, Object userData, BodyType pBodyType, Util.BodyShape pBodyShape, IPhysicsSpriteListener listener) {
+	public PhysicsAnimatedSprite(float pX, float pY, ITiledTextureRegion pTiledTextureRegion, FixtureDef pFixtureDef, Object userData, BodyType pBodyType, Util.BodyShape pBodyShape, IPhysicsSpriteListener listener) {
 		super(pX, pY, pTiledTextureRegion, Resources.mEngine.getVertexBufferObjectManager());
 		mFixtureDef = pFixtureDef;
 		mBodyType = pBodyType;
@@ -46,9 +49,10 @@ public class PhysicsAnimatedSprite extends AnimatedSprite {
 		Load();
 	}
 	
-	public PhysicsAnimatedSprite(float pX, float pY, ITiledTextureRegion pTiledTextureRegion, FixtureDef pFixtureDef, BodyType pBodyType, Vector2[] vertices, IPhysicsSpriteListener listener) {
+	public PhysicsAnimatedSprite(float pX, float pY, ITiledTextureRegion pTiledTextureRegion, FixtureDef pFixtureDef, Object fixtureUserData, BodyType pBodyType, Vector2[] vertices, IPhysicsSpriteListener listener) {
 		super(pX, pY, pTiledTextureRegion, Resources.mEngine.getVertexBufferObjectManager());
 		mFixtureDef = pFixtureDef;
+		mFixtureUserData.add(fixtureUserData);
 		mBodyType = pBodyType;
 		mBodyShape = Util.BodyShape.Polygon;
 		mVertices = vertices;		
@@ -105,22 +109,30 @@ public class PhysicsAnimatedSprite extends AnimatedSprite {
 
 
 	private void ApplyPhysics() {
-		if (mPhysicsConnector != null){
-			Resources.mPhysicsWorld.unregisterPhysicsConnector(mPhysicsConnector);			
-		}
-		if (mBody != null){
-			Resources.mPhysicsWorld.destroyBody(mBody);
-		}
+		destroyPhysics();
 		if (mVertices != null){
 			mVertices = Util.TransformVertices(this, mVertices);
-		}		
+		}
+		else if (mFixtureDefs != null){			
+			mFixtureDefs = Util.TransformVertices(this, mFixtureDefs);
+		}
 		mBody = Util.CreateBody(this, mFixtureDef, mBodyType, mBodyShape, mVertices, mFixtureDefs, mFixtureUserData, mBodyUserData);
 		if (mBodyUserData == null) mBody.setUserData(this);
 		this.setUserData(mBody);
 		mPhysicsConnector = new PhysicsConnector(this, mBody);
 		Resources.mPhysicsWorld.registerPhysicsConnector(mPhysicsConnector);
 	}
+
 	
+		
+	private void destroyPhysics(){
+		if (mPhysicsConnector != null){
+			Resources.mPhysicsWorld.unregisterPhysicsConnector(mPhysicsConnector);			
+		}
+		if (mBody != null){
+			Resources.mPhysicsWorld.destroyBody(mBody);
+		}
+	}
 
 	@Override
 	public void setFlippedVertical(boolean pFlippedVertical) {
@@ -141,7 +153,8 @@ public class PhysicsAnimatedSprite extends AnimatedSprite {
 		ApplyPhysics();
 	}
 
-	public void destroy(){		
+	public void destroy(){	
+		destroyPhysics();
 		if (this.hasParent()){
 			this.detachSelf();
 		}

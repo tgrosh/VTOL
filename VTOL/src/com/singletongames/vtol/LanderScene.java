@@ -128,6 +128,7 @@ public class LanderScene extends GameScene implements SensorEventListener {
 		
 		mHud.setTouchAreaBindingOnActionDownEnabled(true);
 		mHud.setTouchAreaBindingOnActionMoveEnabled(true);
+		mHud.setOnAreaTouchTraversalFrontToBack();
 		
 		this.setTouchAreaBindingOnActionDownEnabled(true);
 		this.setTouchAreaBindingOnActionMoveEnabled(true);
@@ -166,7 +167,50 @@ public class LanderScene extends GameScene implements SensorEventListener {
 		SensorManager sensorManager = (SensorManager)Resources.mActivity.getSystemService(Context.SENSOR_SERVICE);
         sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
                         
-        throttleBackground = new Sprite(30, Resources.CAMERA_HEIGHT - 30 - Resources.mThrottleBackground.getHeight(), Resources.mThrottleBackground, Resources.mEngine.getVertexBufferObjectManager());
+        throttleBackground = new Sprite(30, Resources.CAMERA_HEIGHT - 30 - Resources.mThrottleBackground.getHeight(), Resources.mThrottleBackground, Resources.mEngine.getVertexBufferObjectManager()){
+        	private float throttleButtonTouchY;
+        	@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				if (!paused){
+					if (pSceneTouchEvent.isActionDown()){
+						movingThrottle = true;	
+						throttleButtonTouchY = pSceneTouchEvent.getY();
+						throttleButton.setPosition(throttleButton.getX(), throttleButtonTouchY - throttleButton.getHeight()/2);
+						if (throttleButton.getY() < throttleMaxPosition){
+							throttleButton.setPosition(throttleButton.getX(), throttleMaxPosition);
+						}
+						else if (throttleButton.getY() > throttleStartingPosition){
+							throttleButton.setPosition(throttleButton.getX(), throttleStartingPosition);
+						}
+					}
+					else if (pSceneTouchEvent.isActionUp()){
+						movingThrottle = false;
+						throttleButton.setPosition(throttleButton.getX(), throttleStartingPosition);
+					}
+					else if (pSceneTouchEvent.isActionMove()){
+						if (movingThrottle){
+							float moveAmount = throttleButtonTouchY - pSceneTouchEvent.getY();							
+							throttleButton.setPosition(throttleButton.getX(), throttleButton.getY() - moveAmount);
+						}
+						if (throttleButton.getY() < throttleMaxPosition){
+							throttleButton.setPosition(throttleButton.getX(), throttleMaxPosition);
+						}
+						else if (throttleButton.getY() > throttleStartingPosition){
+							throttleButton.setPosition(throttleButton.getX(), throttleStartingPosition);
+						}
+						throttleButtonTouchY = pSceneTouchEvent.getY();
+					}
+					
+					currentThrottle = (throttleStartingPosition - throttleButton.getY()) / (throttleStartingPosition - throttleMaxPosition); //0-1
+					throttlePercent.setText(String.valueOf((int)(currentThrottle*100)) + "%");
+					throttlePercent.setPosition(throttleButton.getX() + throttleButton.getWidth() + 30, throttleButton.getY() + throttleButton.getHeight()/2 - throttlePercent.getHeight()/2);
+					if (Resources.mCurrentLevel != null && Resources.mCurrentLevel.getLander() != null){
+						Resources.mCurrentLevel.getLander().setThrottle(currentThrottle);
+					}
+				}
+				return true;
+			}        	
+        };
         throttleStartingPosition = throttleBackground.getY() + throttleBackground.getHeight() - throttleBackgroundPadding - Resources.mThrottleButton.getHeight();
         throttleMaxPosition = throttleBackground.getY() + throttleBackgroundPadding;
         throttleButton = new Sprite(throttleBackground.getX() + throttleBackground.getWidth()/2 - Resources.mThrottleButton.getWidth()/2, throttleStartingPosition, Resources.mThrottleButton, Resources.mEngine.getVertexBufferObjectManager()){
@@ -211,6 +255,7 @@ public class LanderScene extends GameScene implements SensorEventListener {
 			
 		};		
 		mHud.attachChild(throttleBackground);
+		mHud.registerTouchArea(throttleBackground);
 		mHud.attachChild(throttleButton);
 		mHud.registerTouchArea(throttleButton);
 		
@@ -490,6 +535,25 @@ public class LanderScene extends GameScene implements SensorEventListener {
 				}
 			};
 			Resources.mCurrentLevel.getLandingPad().getListeners().add(landingPadListener);
+		}
+		
+		for (final CargoDrop drop: Resources.mCurrentLevel.getCargoDrops()){
+			drop.addListener(new ICargoDropListener() {				
+				@Override
+				public void onCargoDelivered(final Cargo cargo) {
+					for (ILanderSceneListener l: listeners){
+						l.onCargoDeliver(cargo, drop);
+					}
+					
+					Resources.mEngine.runOnUpdateThread(new Runnable() {						
+						@Override
+						public void run() {
+							currentLander.detachCargo();
+							cargo.fadeAndDestroy();	
+						}
+					});					
+				}
+			});
 		}
 	}
 	

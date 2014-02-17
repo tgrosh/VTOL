@@ -47,13 +47,13 @@
  </layer>
  <layer name="Tile Layer 1" width="70" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt2FEKgjAcwOF1CYvoBNkZKqL7n8n1IEEwRafL4ffwPQ79/1CntiGEFgAAAAAAAIDiztGjsEvmsfv1a7pFh8Kumcfu1+vy1URvXf5yreiiS01dXtEx4VRRl2ZgjqVnS53XFrtMPaec2XTZZpfPPZ663n/vn6nvDTV36dsMPSfmvkfV3mUtqdnuYfwb6LnDLkvs8TXTRRdd8o3tc3OU+McAAAAAAAAAe9cBrfT0PQ==
+   eJzt18EJwjAYgNG4RBVxAtsZVMT9ZzKXIhRaCWlTf3yHdwxJPkLS9imlHgAAAAAAAIDmztm9sUvl3OP4LQ3ZobFr5dzjeF0+uuylyy5nRRddInV5ZscZp0BduoV9rL23uXX9YpfSNdXsTRddInVZuvumSr+nInfZ4yze0vd/oMcfdlnjjY9MF110qVfy1m31JgIAAAAAAADl3pIY848=
   </data>
  </layer>
  <objectgroup name="Object Layer 1" width="70" height="70">
   <object gid="281" x="926" y="2307"/>
   <object gid="261" x="896" y="2292"/>
-  <object gid="282" x="2698" y="2005">
+  <object gid="282" x="2696" y="2007">
    <properties>
     <property name="id" value="0"/>
    </properties>
@@ -61,19 +61,17 @@
   <object gid="94" x="1187" y="1655"/>
  </objectgroup>
  <objectgroup color="#00aaff" name="Physics" width="70" height="70">
-  <object x="1288" y="2068" width="717" height="182"/>
-  <object x="1169" y="2249" width="116" height="59"/>
-  <object x="627" y="2248" width="61" height="57"/>
-  <object x="689" y="2308" width="481" height="49"/>
+  <object x="1288" y="2068" width="719" height="296"/>
+  <object x="631" y="2310" width="657" height="53"/>
   <object x="621" y="1597" width="1388" height="51"/>
-  <object x="573" y="1645" width="55" height="604"/>
-  <object x="1945" y="2252" width="60" height="475"/>
-  <object x="2367" y="1648" width="180" height="716"/>
-  <object x="2550" y="2006" width="355" height="361"/>
+  <object x="573" y="1645" width="55" height="722"/>
+  <object x="1945" y="2252" width="62" height="474"/>
+  <object x="2367" y="1648" width="120" height="720"/>
+  <object x="2490" y="2009" width="419" height="359"/>
   <object x="2008" y="2668" width="1319" height="61"/>
   <object x="3270" y="1767" width="57" height="901"/>
-  <object x="2009" y="1596" width="1377" height="49"/>
-  <object x="3326" y="1650" width="63" height="116"/>
+  <object x="2009" y="1596" width="1377" height="51"/>
+  <object x="3329" y="1649" width="63" height="116"/>
  </objectgroup>
  <objectgroup color="#aaff00" name="Objectives" width="70" height="70">
   <object x="1982" y="1658" width="376" height="400">

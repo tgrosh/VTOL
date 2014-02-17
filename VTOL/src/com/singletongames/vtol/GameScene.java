@@ -11,6 +11,10 @@ import com.badlogic.gdx.physics.box2d.Joint;
 
 public class GameScene extends Scene implements IGameScene {
 
+	public GameScene(){
+		Resources.mEngine.clearUpdateHandlers();
+	}
+	
 	@Override
 	public void Pause() {
 		// TODO Auto-generated method stub
@@ -65,7 +69,9 @@ public class GameScene extends Scene implements IGameScene {
                 Debug.e(e);
             }
         }
-                
+        
+        this.clearUpdateHandlers();
+        this.clearEntityModifiers();
         this.reset();
         this.detachSelf();
 //        Resources.mPhysicsWorld.clearForces();

@@ -75,7 +75,12 @@ public class ObjectiveParser extends DefaultHandler
 	                int prerequisiteID = SAXUtils.getIntAttribute(attributes, "prerequisiteId", -1);
 	                boolean hidden = SAXUtils.getBooleanAttribute(attributes, "hidden", false);
 	                
-	                if (type.equals("ZoneObjective")){
+	                if (type.equals("DeliverCargoObjective")){
+	                	int cargoId = SAXUtils.getIntAttributeOrThrow(attributes, "cargoId");
+	                	int cargoDropId = SAXUtils.getIntAttributeOrThrow(attributes, "cargoDropId");
+		                objectives.add(new DeliverCargoObjective(manager, scene, id, description, cargoId, cargoDropId, hidden, prerequisiteID, objectiveListener));
+	                }
+	                else if (type.equals("ZoneObjective")){
 	                	int objectiveZoneID = SAXUtils.getIntAttributeOrThrow(attributes, "objectiveZoneID");
 		                objectives.add(new ZoneObjective(manager, scene, id, objectiveZoneID, description, hidden, prerequisiteID, objectiveListener));
 	                }
